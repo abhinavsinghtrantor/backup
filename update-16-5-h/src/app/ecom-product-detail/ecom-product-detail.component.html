@@ -1,0 +1,28 @@
+<div class="header">
+  <div class="heading">Test App</div>
+</div>
+<div class="container-fluid">
+	<div class="product-images"></div>
+	<div class="product-details">
+		<div class="p-title">{{productDetails.title}}</div>
+		<div class="price-container">
+			<span class="d-price">{{productDetails.dPrice}}</span>
+			<span class="a-price">{{productDetails.aPrice}}</span>
+			<span class="discount">{{productDetails.discount}}</span>
+		</div>
+		<div class="policy-container">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="p-details">
+			<ul>
+				<li>Material: Cotton</li>
+				<li>Fit: Regular Fit</li>
+				<li>Material: Cotton</li>
+				<li>Material: Cotton</li>
+			</ul>
+		</div>
+		<div class="buy-button" (click)="buyProduct()">BUY NOW</div>
+	</div>
+</div>

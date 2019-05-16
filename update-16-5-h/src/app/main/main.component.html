@@ -1,0 +1,44 @@
+<div class="header">
+  <div class="heading">Test App</div>
+  <div class="top-container">
+    <div class="search-box">
+      <input type="text" placeholder="Search for products/services" />
+    </div>
+</div>
+</div>
+<div class="container-fluid">
+  
+
+  <div class="bottom-container">
+    <h5>Banking Services</h5>
+    <div class="row" *ngFor="let items of bItems">
+      <div class="col col1"><div style="text-align: center">{{items[0]}}</div></div>
+      <div class="col"><div style="text-align: center">{{items[1]}}</div></div>
+      <div class="col"><div style="text-align: center">{{items[2]}}</div></div>
+  </div>
+</div>
+
+<div class="bottom-container">
+    <h5>Top Offers</h5>
+    <div class="row" *ngFor="let items of topOffersItems">
+      <div class="col col1"><div style="text-align: center"><div>{{items[0].name}}</div><div>{{items[0].offer}}</div></div></div>
+      <div class="col"><div style="text-align: center"><div>{{items[1].name}}</div><div>{{items[1].offer}}</div></div></div>
+  </div>
+</div>
+
+<div class="bottom-container">
+    <h4>Shop Online</h4>
+    <div class="row" *ngFor="let items of shopCategories">
+      <div class="col col1">{{items[0]}}</div>
+      <div class="col">{{items[1]}}</div>
+  </div>
+</div>
+
+<div class="bottom-container">
+    <h4>Nearby Offers</h4>
+    <div class="row" *ngFor="let items of bItems">
+      <div class="col">{{items[0]}}</div>
+      <div class="col">{{items[1]}}</div>
+      <div class="col">{{items[2]}}</div>
+  </div>
+</div>
