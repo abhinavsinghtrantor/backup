@@ -1,0 +1,56 @@
+<div class="header">
+  <div class="heading">Test App</div>
+</div>
+
+<div class="container-fluid">
+	<h5>Select you payment</h5>
+	<div class="payment-container">
+		<div class="card" (click) = "selectPayMode('online')">
+			<div class="card-body">
+				<div class="card-text">
+					Online Payment
+				</div>
+			</div>
+		</div>
+		<div class="card" (click) = "selectPayMode('cod')">
+			<div class="card-body">
+				<div class="card-text">
+					Cash on Delivery
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h5 style="margin-top: 10px;">Total Amount</h5>
+	<div class="card">
+		<div class="card-body">
+			<div class="card-text">
+				Total Amount : Rs. 2000
+			</div>
+		</div>
+	</div>
+
+	<div class="cart-container">
+		<h5>Cart</h5>
+		<div class="card" style="width: 100%;">
+		    <div class="card-body">
+		      <div class="left">wwe</div>
+		      <div class="right">
+		      	<div class="title">Enchanted Drapes Men Regular Fit Casual shirt - Brown</div>
+		      	<div class="price">
+		      		<div class="d-price">Rs. 1000</div>
+		      		<div class="a-price">
+		      			<span>Rs. 2000</span>
+		      			<span>50% Off</span>
+		      		</div>
+		      	</div>
+		      </div>
+		    </div>
+		  </div>
+	</div>
+
+	<div class="bottom-bar">
+		<div class="button">Place Order</div>
+	</div>
+</div>
+	

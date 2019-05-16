@@ -1,0 +1,21 @@
+<div class="header">
+  <div class="heading">Test App</div>
+</div>
+<div class="container-fluid">
+	<div class="card search-ecom">
+		<input type="search" placeholder="Search here" />
+	</div>
+	<div class="row">
+		<div class="col col-6" *ngFor = "let prod of products.productList">
+			<div class="card" style="width: 100%;">
+			    <div class="card-body">
+			      <h5 class="card-title sub-name">{{prod.name}}</h5>
+			      <div class="card-text sub-offer">{{prod.dPrice}}</div>
+			      <div class="card-text sub-offer">{{prod.aPrice}}</div>
+			      <div class="card-text sub-offer">{{prod.offer}}</div>
+			    </div>
+			  </div>
+		</div>
+	</div>
+</div>
+
