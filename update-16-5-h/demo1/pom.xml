@@ -29,15 +29,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
-		      
+
+
 		</plugins>
 	</build>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-	
+
 
 	<dependencies>
 		<dependency>
@@ -77,12 +77,12 @@
 	        <version>1.0</version>
 	    </dependency>
 
-	    <dependency> 
-			<groupId>com.indus.apiFunction</groupId> 
-			<artifactId>apiFunction</artifactId> 
-			<version>1.0</version> 
-			<scope>provided</scope> 
-		</dependency> 
+	    <dependency>
+			<groupId>com.indus.apiFunction</groupId>
+			<artifactId>apiFunction</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 			<dependency>
 				  <groupId>org.apache.maven.plugins</groupId>
@@ -90,11 +90,19 @@
 				  <version>3.0.0-M1</version>
 				  <type>maven-plugin</type>
 				</dependency>
-    
+
+				<!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20180813</version>
+</dependency>
+
+
 	</dependencies>
 
-	
 
-	
+
+
 
 </project>

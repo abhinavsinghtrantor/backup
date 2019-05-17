@@ -8,7 +8,7 @@ export class ApiServiceService {
 
   constructor(private http: HttpClient) { }
 
- 
+
   getSubCategories(cId) {
     return this.http.get("http://localhost:3000/getSubCategories/"+cId);
   }
@@ -75,5 +75,6 @@ export class ApiServiceService {
   }
 
   
-  
+
+
 }

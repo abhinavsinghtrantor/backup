@@ -7,17 +7,16 @@
 </div>
 </div>
 <div class="container-fluid">
-  
+
 
   <div class="bottom-container">
     <h5>Banking Services</h5>
     <div class="row" *ngFor="let items of bItems">
-      <div class="col col1"><div style="text-align: center">{{items[0]}}</div></div>
-      <div class="col"><div style="text-align: center">{{items[1]}}</div></div>
-      <div class="col"><div style="text-align: center">{{items[2]}}</div></div>
+      <div class="col col1"><div style="text-align: center"><a routerLink="{{items[0].r}}" >{{items[0].n}}</a></div></div>
+      <div class="col"><div style="text-align: center"><a routerLink="{{items[1].r}}" >{{items[1].n}}</a></div></div>
+      <div class="col"><div style="text-align: center"><a routerLink="{{items[2].r}}" >{{items[2].n}}</a></div></div>
   </div>
 </div>
-
 <div class="bottom-container">
     <h5>Top Offers</h5>
     <div class="row" *ngFor="let items of topOffersItems">

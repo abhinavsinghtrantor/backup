@@ -8,14 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.json.JSONObject;
 
 import com.indus.apiFunction.ApiMethod;
 
 @RestController
 public class HelloController {
 
-    @GetMapping("/login")
-    public  String postController1(@RequestParam("aadhar") String aadharNum){
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/login")
+    public  String postController1(@RequestBody String data){
+      JSONObject json = new JSONObject(data);
+      String aadharNum = (String) json.get("aadharNum");
       System.out.println(aadharNum);
     	 ApiMethod apiMethod = new ApiMethod();
     	 String loginResponse= apiMethod.login(aadharNum);
@@ -24,7 +31,7 @@ public class HelloController {
     }
 
     @GetMapping("/getSavingsDetails")
-    public  String postController2(@RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum){
+    public  String postController2(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum){
        ApiMethod apiMethod = new ApiMethod();
        String savingsAccountsInquiryResponse = apiMethod.savingsAccountInquiry(aadharNum, accountNum);
     	 System.out.println("The response for SavingsAccountInquiry method is   "+ savingsAccountsInquiryResponse);
@@ -32,7 +39,7 @@ public class HelloController {
     }
 
     @GetMapping("/getLoanDetails")
-    public  String postController3(@RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum){
+    public  String postController3(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum){
        ApiMethod apiMethod = new ApiMethod();
        String loanAccountsInquiryResponse = apiMethod.loanAccountInquiry(aadharNum, accountNum);
     	 System.out.println("The response for LoanAccountInquiry method is   "+ loanAccountsInquiryResponse);
@@ -40,7 +47,7 @@ public class HelloController {
     }
 
     @PostMapping("/withdraw")
-    public  String postController4(@RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum,
+    public  String postController4(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum,
     @RequestParam("currency") String currency, @RequestParam("amount") long amount, @RequestParam("cashBalance") long cashBalance){
        ApiMethod apiMethod = new ApiMethod();
        String balWithdrawResponse = apiMethod.balWithdraw(aadharNum, accountNum, currency, amount,"dbt","cdt", cashBalance);
@@ -49,7 +56,7 @@ public class HelloController {
     }
 
     @PostMapping("/deposit")
-    public  String postController5(@RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum,
+    public  String postController5(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum,
     @RequestParam("currency") String currency, @RequestParam("amount") long amount, @RequestParam("cashBalance") long cashBalance){
        ApiMethod apiMethod = new ApiMethod();
        String fundDepositResponse = apiMethod.fundDeposit(aadharNum, accountNum, currency, amount,"dbt","cdt",cashBalance);
@@ -58,7 +65,7 @@ public class HelloController {
     }
 
     @GetMapping("/billFetch")
-    public  String postController6(@RequestParam("billerCategory") String billerCategory, @RequestParam("mobileNum") String mobileNum,
+    public  String postController6(@RequestBody String data, @RequestParam("billerCategory") String billerCategory, @RequestParam("mobileNum") String mobileNum,
     @RequestParam("billMerchantName") String billMerchantName){
        ApiMethod apiMethod = new ApiMethod();
        String billFetchResponse = apiMethod.billFetch(billerCategory, mobileNum, billMerchantName, "1000101001");
@@ -67,7 +74,7 @@ public class HelloController {
     }
 
     @PostMapping("/billPayment")
-    public  String postController7(@RequestParam("aadhar") String aadharNum, @RequestParam("fromAccount") String fromAccountNum,
+    public  String postController7(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("fromAccount") String fromAccountNum,
     @RequestParam("toAccount") String toAccountNum, @RequestParam("accType") String accType, @RequestParam("amount") long amount, @RequestParam("cashBalance") long cashBalance){
        ApiMethod apiMethod = new ApiMethod();
        String paymentResponse = apiMethod.payment(aadharNum, fromAccountNum, toAccountNum, accType, amount,"dbt","cdt",cashBalance,"");

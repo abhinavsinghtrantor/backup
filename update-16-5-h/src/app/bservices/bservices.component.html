@@ -1,7 +1,7 @@
 <div class="header">
   <div class="heading">Test App</div>
 </div>
-<div class="container-fluid savings-container">
+<div class="container-fluid savings-container" *ngIf="isSavingsAccount">
   <div class="card">
     <div class="card-body">
       <div class="card-text">
@@ -14,7 +14,7 @@
 </div>
 
 
-<div class="container-fluid loan-container">
+<div class="container-fluid loan-container" *ngIf="isLoanAccount">
   <div class="card">
     <div class="card-body">
       <div class="card-text">
@@ -26,7 +26,7 @@
   </div>
 </div>
 
-<div class="container-fluid account-details border-bottom">
+<div class="container-fluid account-details border-bottom" *ngIf="isAccountDetail">
   <h5>Account Details</h5>
     <div class="row border-top">
       <div class="col col-6 border border-top-0 border-bottom-0">Left</div>
@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div class="container-fluid cash-withdraw">
+<div class="container-fluid cash-withdraw" *ngIf="isWithdraw">
   <h4>Cash Withdrawel Page</h4>
   <h5>Enter Amount</h5>
   <div class="withdraw-input">
@@ -64,8 +64,8 @@
   <div class="bottom-box">SUBMIT</div>
 </div>
 
-<div class="container-fluid cash-withdraw">
-  <h4>Cash Withdrawel Page</h4>
+<div class="container-fluid cash-withdraw" *ngIf="isdeposit">
+  <h4>Cash Deposit Page</h4>
   <h5>Enter Amount</h5>
   <div class="withdraw-input">
     <input type="text" placeholder="Enter amount" />
