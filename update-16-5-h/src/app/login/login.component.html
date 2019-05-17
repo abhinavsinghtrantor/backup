@@ -9,11 +9,13 @@
 
 <div class="aadhar-container" *ngIf="isAadhar">
   <div class="header">
-    <div class="heading">Test App</div>
+
+    <div class="heading"><i class="fa fa-arrow-left" aria-hidden="true" (click)="back('login')"></i>Test App</div>
   </div>
   <div class="aadhar-form">
     <h5>Enter your aadhar</h5>
     <input type="text" placeholder="Enter your aadhar number" [(ngModel)] = "aadharNum"/>
+    <div class="error" *ngIf="isAadharInValid">Please enter correct aadhar number</div>
   </div>
 
   <div class="bottom-box" (click)="generateOtp()">NEXT</div>
@@ -21,11 +23,12 @@
 
 <div class="aadhar-container" *ngIf="isOtp">
   <div class="header">
-    <div class="heading">Test App</div>
+   <div class="heading"><i class="fa fa-arrow-left" aria-hidden="true" (click)="back('aadhar')"></i>Test App</div>
   </div>
   <div class="aadhar-form">
     <h5>Enter OTP</h5>
     <input type="text" placeholder="Enter your otp"  [(ngModel)] = "otp"/>
+    <div class="error" *ngIf="isOtpInvalid">Please enter correct otp</div>
     <div class="re-otp">Resend OTP</div>
   </div>
 

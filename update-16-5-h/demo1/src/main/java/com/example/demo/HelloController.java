@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import com.indus.apiFunction.ApiMethod;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class HelloController {
 
@@ -30,25 +31,40 @@ public class HelloController {
     	return loginResponse;
     }
 
-    @GetMapping("/getSavingsDetails")
-    public  String postController2(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum){
+    @PostMapping("/getSavingsDetails")
+    public  String postController2(@RequestBody String data){
+       JSONObject json = new JSONObject(data);
+       String aadharNum = (String) json.get("aadharNum");
+       String accountNum = (String) json.get("accountNum");
+
        ApiMethod apiMethod = new ApiMethod();
-       String savingsAccountsInquiryResponse = apiMethod.savingsAccountInquiry(aadharNum, accountNum);
+       String savingsAccountsInquiryResponse = apiMethod.savingsAccountInquiry(accountNum, aadharNum);
     	 System.out.println("The response for SavingsAccountInquiry method is   "+ savingsAccountsInquiryResponse);
       return savingsAccountsInquiryResponse;
     }
 
-    @GetMapping("/getLoanDetails")
-    public  String postController3(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum){
+    @PostMapping("/getLoanDetails")
+    public  String postController3(@RequestBody String data){
+       JSONObject json = new JSONObject(data);
+       String aadharNum = (String) json.get("aadharNum");
+       String accountNum = (String) json.get("accountNum");
        ApiMethod apiMethod = new ApiMethod();
-       String loanAccountsInquiryResponse = apiMethod.loanAccountInquiry(aadharNum, accountNum);
+       String loanAccountsInquiryResponse = apiMethod.loanAccountInquiry(accountNum, aadharNum);
     	 System.out.println("The response for LoanAccountInquiry method is   "+ loanAccountsInquiryResponse);
       return loanAccountsInquiryResponse;
     }
 
     @PostMapping("/withdraw")
-    public  String postController4(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum,
-    @RequestParam("currency") String currency, @RequestParam("amount") long amount, @RequestParam("cashBalance") long cashBalance){
+    public  String postController4(@RequestBody String data){
+       JSONObject json = new JSONObject(data);
+       String aadharNum = (String) json.get("aadharNum");
+       String accountNum = (String) json.get("accountNum");
+       String currency = (String) json.get("currency");
+       String amountStr = (String) json.get("amount");
+       double amount = Double.parseDouble(amountStr);
+       String cashBalanceStr = (String) json.get("cashBalance");
+       double cashBalance = Double.parseDouble(cashBalanceStr);
+       
        ApiMethod apiMethod = new ApiMethod();
        String balWithdrawResponse = apiMethod.balWithdraw(aadharNum, accountNum, currency, amount,"dbt","cdt", cashBalance);
     	 System.out.println("The response for balWithdraw method is   "+ balWithdrawResponse);
@@ -56,17 +72,29 @@ public class HelloController {
     }
 
     @PostMapping("/deposit")
-    public  String postController5(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("account") String accountNum,
-    @RequestParam("currency") String currency, @RequestParam("amount") long amount, @RequestParam("cashBalance") long cashBalance){
+    public  String postController5(@RequestBody String data){
+       JSONObject json = new JSONObject(data);
+       String aadharNum = (String) json.get("aadharNum");
+       String accountNum = (String) json.get("accountNum");
+       String currency = (String) json.get("currency");
+       String amountStr = (String) json.get("amount");
+       double amount = Double.parseDouble(amountStr);
+       String cashBalanceStr = (String) json.get("cashBalance");
+       double cashBalance = Double.parseDouble(cashBalanceStr);
+
        ApiMethod apiMethod = new ApiMethod();
        String fundDepositResponse = apiMethod.fundDeposit(aadharNum, accountNum, currency, amount,"dbt","cdt",cashBalance);
     	 System.out.println("The response for fundDeposit method is   "+ fundDepositResponse);
       return fundDepositResponse;
     }
 
-    @GetMapping("/billFetch")
-    public  String postController6(@RequestBody String data, @RequestParam("billerCategory") String billerCategory, @RequestParam("mobileNum") String mobileNum,
-    @RequestParam("billMerchantName") String billMerchantName){
+    @PostMapping("/billFetch")
+    public  String postController6(@RequestBody String data){
+       JSONObject json = new JSONObject(data);
+       String billerCategory = (String) json.get("billerCategory");
+       String mobileNum = (String) json.get("mobileNum");
+       String billMerchantName = (String) json.get("billMerchantName");
+
        ApiMethod apiMethod = new ApiMethod();
        String billFetchResponse = apiMethod.billFetch(billerCategory, mobileNum, billMerchantName, "1000101001");
     	 System.out.println("The response for billFetch method is   "+ billFetchResponse);
@@ -74,8 +102,17 @@ public class HelloController {
     }
 
     @PostMapping("/billPayment")
-    public  String postController7(@RequestBody String data, @RequestParam("aadhar") String aadharNum, @RequestParam("fromAccount") String fromAccountNum,
-    @RequestParam("toAccount") String toAccountNum, @RequestParam("accType") String accType, @RequestParam("amount") long amount, @RequestParam("cashBalance") long cashBalance){
+    public  String postController7(@RequestBody String data){
+       JSONObject json = new JSONObject(data);
+       String aadharNum = (String) json.get("aadharNum");
+       String fromAccountNum = (String) json.get("fromAccountNum");
+       String toAccountNum = (String) json.get("toAccountNum");
+       String accType = (String) json.get("accType");
+       String amountStr = (String) json.get("amount");
+       double amount = Double.parseDouble(amountStr);
+       String cashBalanceStr = (String) json.get("cashBalance");
+       double cashBalance = Double.parseDouble(cashBalanceStr);
+       
        ApiMethod apiMethod = new ApiMethod();
        String paymentResponse = apiMethod.payment(aadharNum, fromAccountNum, toAccountNum, accType, amount,"dbt","cdt",cashBalance,"");
        System.out.println("The response for payment method is   "+ paymentResponse);

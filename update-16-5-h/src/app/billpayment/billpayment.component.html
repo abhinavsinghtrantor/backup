@@ -2,58 +2,62 @@
   <div class="heading">Bank App</div>
 </div>
 
-<div class="container-fluid bill-fetch">
+<div class="container-fluid bill-fetch" *ngIf="!isBillDetail" (change) = "category()">
   <h4>Pay your bills</h4>
   <div class="biller-category biller-select">
     <h5>Select Category</h5>
-    <select>
-      <option value="0">Choose Category</option>
-      <option value="1">Electricity</option>
-      <option value="2">Mobile</option>
-      <option value="3">Water</option>
-      <option value="4">DTH</option>
+    <select [(ngModel)] = "billCategory">
+      <option value="">Choose Category</option>
+      <option value="Electricity">Electricity</option>
+      <option value="Mobile">Mobile</option>
     </select>
   </div>
-  <div class="biller-merchant biller-select">
+  <div class="biller-merchant-electricity biller-select" *ngIf="isElectricity">
     <h5>Select Merchant</h5>
-    <select>
-      <option value="0">Choose Merchant</option>
-      <option value="1">Reliance</option>
-      <option value="2">Adani</option>
-      <option value="3">Kesco</option>
+    <select [(ngModel)] = "merchant">
+      <option value="">Choose Merchant</option>
+      <option value="Reliance">Reliance</option>
+      <option value="Adani Energy">Adani Energy</option>
+      <option value="Kesco">Kesco</option>
     </select>
   </div>
 
-  <div class="bottom-box">SUBMIT</div>
+  <div class="biller-merchant-mobile biller-select" *ngIf="isMobile">
+    <h5>Select Merchant</h5>
+    <select [(ngModel)] = "merchant">
+      <option value="">Choose Merchant</option>
+      <option value="Vodafone">Vodafone</option>
+      <option value="Adani">Adani</option>
+      <option value="Kesco">Kesco</option>
+    </select>
+  </div>
+
+  <div class="mobile-input">
+    <h5>Enter Mobile</h5>
+    <input type="tel" [(ngModel)]="mobileNum" style="width: 100%"/>
+    <div class="error" *ngIf="isError">Please enter correct mobile</div>
+  </div>
+
+  <div class="bottom-box" (click)="getBill()">SUBMIT</div>
 </div>
 
-<div class="container-fluid bill-payments">
+<div class="container-fluid bill-payments" *ngIf="isBillDetail">
   <div class="border-bottom" style="margin-bottom: 10px;">
   <h5>Bill Details</h5>
-    <div class="row border-top">
-      <div class="col col-6 border border-top-0 border-bottom-0">Left</div>
-      <div class="col col-6 col-right border border-left-0 border-top-0 border-bottom-0">Right</div>
-    </div>
-    <div class="row border-top">
-      <div class="col col-6 border border-top-0 border-bottom-0">Left</div>
-      <div class="col col-6 col-right border border-left-0 border-top-0 border-bottom-0">Right</div>
+    <div class="row border-top" *ngFor="let bill of billDetails | keyvalue">
+      <div class="col col-6 border border-top-0 border-bottom-0">{{bill.key}}</div>
+      <div class="col col-6 col-right border border-left-0 border-top-0 border-bottom-0">{{bill.value}}</div>
     </div>
     </div>
 
     <h5>Select Account</h5>
     <div class="account-radio">
-      <div class="card">
+      <div class="card" *ngFor="let item of savingAccounts" (click) = "accountSelect(item.accNumber)">
         <div class="card-body">
-          <input type="radio" value="a1" name="s-account"/>
-          <span>Account1</span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <input type="radio" value="a2" name="s-account"/>
-          <span>Account2</span>
+          <input type="radio" value="a1" name="s-account" [checked]="account == item.accNumber"/>
+          <span>{{item.accNumber}}</span>
         </div>
       </div>
     </div>
-    <div class="bottom-box">PAY</div>
+    <div class="bottom-box" (click)="payBill()">PAY</div>
 </div>

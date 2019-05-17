@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UserServiceService } from './user-service.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServiceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserServiceService) { }
 
 
   getSubCategories(cId) {
@@ -74,7 +76,47 @@ export class ApiServiceService {
     return this.http.post("http://localhost:3000/completeOrder", obj);
   }
 
-  
+  getAccountDetils(accNumber, type){
+    let accDetails = JSON.parse(sessionStorage['accDetails']);
+    if(accNumber in accDetails){
+      const obs = new Observable(observer => {
+            setTimeout(() => {
+                observer.next(accDetails[accNumber]);
+            }, 1);
+     });
+      return obs;
+    }else{
+      let aadharNum = this.userService.getUserAadhar();
+      let data = JSON.stringify({aadharNum : aadharNum, accountNum : accNumber});
+      if(type == "Savings"){
+        return this.http.post("http://localhost:8080/getSavingsDetails", data);
+       }else if(type == "Loan"){
+         return this.http.post("http://localhost:8080/getLoanDetails", data);
+       }
+   }
+  }
 
+  withdraw(amount, accNum, currency, cashBalance){
+    let aadharNum = this.userService.getUserAadhar();
+    let data = {aadharNum: aadharNum, amount : amount, accountNum : accNum, currency : currency, cashBalance : cashBalance};
+    return this.http.post("http://localhost:8080/withdraw", data);
+  }
 
-}
+  deposit(amount, accNum, currency, cashBalance){
+    let aadharNum = this.userService.getUserAadhar();
+    let data = {aadharNum: aadharNum, amount : amount, accountNum : accNum, currency : currency, cashBalance : cashBalance};
+    return this.http.post("http://localhost:8080/deposit", data);
+  }
+
+  billFetch(category, mobilenum, merName){
+    let data = {billerCategory: category, mobileNum:mobilenum, billMerchantName: merName};
+     return this.http.post("http://localhost:8080/billFetch", data);
+    }
+
+    payBill(fromAccountNum, toAccountNum, accType, amount, cashBalance){
+      let aadharNum = this.userService.getUserAadhar();
+      let data = {aadharNum: aadharNum, fromAccountNum : fromAccountNum, toAccountNum: ""+toAccountNum, accType: accType, amount: amount, cashBalance : cashBalance};
+      return this.http.post("http://localhost:8080/billPayment", data);
+    }
+  }
+
