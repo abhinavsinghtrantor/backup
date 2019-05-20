@@ -17,13 +17,15 @@ export class UserServiceService {
   }
 
   userAuthenticate(aadharNum, otp){
-    let data = JSON.stringify({aadharNum : aadharNum, otp : otp});
-    return this.http.post("http://localhost:8080/login", data);
+    //let data = JSON.stringify({aadharNum : aadharNum, otp : otp});
+    let data = {aadharNum : aadharNum, otp : otp};
+    return this.http.post("http://localhost:3000/login", data);
   }
 
-  createSession(aadharNum, user, accounts){
+  createSession(aadharNum, user, accounts, token, id){
     sessionStorage['user'] = JSON.stringify({aadharNum : aadharNum, name : user.name, age : user.age, mobile : user.mobile});
-    sessionStorage['token'] = "123";
+    sessionStorage['token'] = token;
+    sessionStorage['id'] = id;
     sessionStorage['accDetails'] = JSON.stringify({});
     sessionStorage['accounts'] = JSON.stringify(accounts);
   }

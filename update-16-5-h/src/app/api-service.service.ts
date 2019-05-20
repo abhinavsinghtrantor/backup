@@ -1,34 +1,38 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserServiceService } from './user-service.service';
 import { Observable } from 'rxjs';
+import { environment } from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServiceService {
 
-  constructor(private http: HttpClient, private userService: UserServiceService) { }
-
+  url: string;
+  token: string;
+  constructor(private http: HttpClient, private userService: UserServiceService) {
+    this.url = environment.SERVER_URL;
+   }
 
   getSubCategories(cId) {
-    return this.http.get("http://localhost:3000/getSubCategories/"+cId);
+    return this.http.get(this.url+"/getSubCategories/"+cId);
   }
 
   getProducts(cId){
-  	return this.http.get("http://localhost:3000/collection/"+cId);
+  	return this.http.get(this.url+"http://localhost:3000/collection/"+cId);
   };
 
   getProductDetail(cId, pId){
-  	return this.http.get("http://localhost:3000/collection/"+cId+"/product/"+pId);
+  	return this.http.get(this.url+"http://localhost:3000/collection/"+cId+"/product/"+pId);
   };
 
   getAddress(){
-  	return this.http.get("http://localhost:3000/getAddress");
+  	return this.http.get(this.url+"http://localhost:3000/getAddress");
   }
 
   saveAddress(obj){
-  	return this.http.post("http://localhost:3000/saveAddress", obj);
+  	return this.http.post(this.url+"http://localhost:3000/saveAddress", obj);
   }
 
   saveCart(product){
@@ -73,10 +77,15 @@ export class ApiServiceService {
     let cart = JSON.parse(sessionStorage["cart"]);
     let addressId = sessionStorage["addressId"];
     let obj = {cart : cart, addressId : addressId};
-    return this.http.post("http://localhost:3000/completeOrder", obj);
+    return this.http.post(this.url+"http://localhost:3000/completeOrder", obj);
   }
 
   getAccountDetils(accNumber, type){
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }else{
+      window.location.href = "http://localhost:4200/";
+    }
     let accDetails = JSON.parse(sessionStorage['accDetails']);
     if(accNumber in accDetails){
       const obs = new Observable(observer => {
@@ -86,12 +95,16 @@ export class ApiServiceService {
      });
       return obs;
     }else{
+      let headers = new HttpHeaders(
+          { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+        );
       let aadharNum = this.userService.getUserAadhar();
-      let data = JSON.stringify({aadharNum : aadharNum, accountNum : accNumber});
       if(type == "Savings"){
-        return this.http.post("http://localhost:8080/getSavingsDetails", data);
+        let data = JSON.stringify({aadharNum : aadharNum, accountNum : accNumber, url : "getSavingsDetails"});
+        return this.http.post(this.url+"/bank", data, {headers : headers});
        }else if(type == "Loan"){
-         return this.http.post("http://localhost:8080/getLoanDetails", data);
+         let data = JSON.stringify({aadharNum : aadharNum, accountNum : accNumber, url : "getLoanDetails"});
+         return this.http.post(this.url+"/bank", data, {headers : headers});
        }
    }
   }
@@ -99,24 +112,24 @@ export class ApiServiceService {
   withdraw(amount, accNum, currency, cashBalance){
     let aadharNum = this.userService.getUserAadhar();
     let data = {aadharNum: aadharNum, amount : amount, accountNum : accNum, currency : currency, cashBalance : cashBalance};
-    return this.http.post("http://localhost:8080/withdraw", data);
+    return this.http.post(this.url+"http://localhost:8080/withdraw", data);
   }
 
   deposit(amount, accNum, currency, cashBalance){
     let aadharNum = this.userService.getUserAadhar();
     let data = {aadharNum: aadharNum, amount : amount, accountNum : accNum, currency : currency, cashBalance : cashBalance};
-    return this.http.post("http://localhost:8080/deposit", data);
+    return this.http.post(this.url+"http://localhost:8080/deposit", data);
   }
 
   billFetch(category, mobilenum, merName){
     let data = {billerCategory: category, mobileNum:mobilenum, billMerchantName: merName};
-     return this.http.post("http://localhost:8080/billFetch", data);
+     return this.http.post(this.url+"http://localhost:8080/billFetch", data);
     }
 
     payBill(fromAccountNum, toAccountNum, accType, amount, cashBalance){
       let aadharNum = this.userService.getUserAadhar();
       let data = {aadharNum: aadharNum, fromAccountNum : fromAccountNum, toAccountNum: ""+toAccountNum, accType: accType, amount: amount, cashBalance : cashBalance};
-      return this.http.post("http://localhost:8080/billPayment", data);
+      return this.http.post(this.url+"http://localhost:8080/billPayment", data);
     }
   }
 

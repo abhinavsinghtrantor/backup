@@ -19,9 +19,12 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserServiceService,
     private route: ActivatedRoute,
-  private router: Router) { }
+    private router: Router) { }
 
   ngOnInit() {
+    if(sessionStorage.getItem("token") != undefined){
+      this.router.navigate(['/main']);
+    }
     if(this.userService.isUserLogin){
       this.isLogin = true;
     }
@@ -54,7 +57,9 @@ export class LoginComponent implements OnInit {
         }else if(data.status == "Success"){
           let user = {name : data.name, age: data.age, mobile: data.mobile};
           let accounts = data.accounts;
-          this.userService.createSession(this.aadharNum, user, accounts);
+          let token = data.token;
+          let id = data.id;
+          this.userService.createSession(this.aadharNum, user, accounts, token, id);
           this.router.navigate(['/main']);
         }
       });
