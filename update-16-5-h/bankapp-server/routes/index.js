@@ -40,13 +40,11 @@ router.post('/bank', function(req, res){
     if(session[aadharNum] == token){
     	var url = "http://localhost:8080/"+req.body.url;
     	delete req.body["url"];
-    	console.log(url);
 		var data = JSON.stringify(req.body);
     	request.post({
     		url : url,
     		body: data
     	}, function(err, resp, body){
-    		console.log(body);
     		res.send(body);
     	})
     }else{
@@ -55,6 +53,20 @@ router.post('/bank', function(req, res){
   });
 
 })
+
+router.post('/logout', function(req, res){
+	var token = req.headers['x-access-token'];
+	if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+	jwt.verify(token, config.secret, function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+		var aadharNum = decoded.aadharNum;
+		if(session[aadharNum] == token){
+			delete session[aadharNum];
+		}
+		res.json({msg : "success"});
+});
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -77,13 +89,13 @@ router.get('/collection/:cId', function(req, res, next){
 	if(cId == "mobile-phones"){
 		var collection = {};
 		var productList = [];
-		  	productList[0] = {pId:"mobileP1", name : "1IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off", 
+		  	productList[0] = {pId:"mobileP1", name : "1IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
 		  						imgUrl : ""};
-		  	productList[1] = {pId:"mobileP2", name : "2IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off", 
+		  	productList[1] = {pId:"mobileP2", name : "2IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
 		  						imgUrl : ""};
-		  	productList[2] = {pId:"mobileP3", name : "3IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off", 
+		  	productList[2] = {pId:"mobileP3", name : "3IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
 		  						imgUrl : ""};
-		  	productList[3] = {pId:"mobileP4", name : "4IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off", 
+		  	productList[3] = {pId:"mobileP4", name : "4IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
 		  						imgUrl : ""};
 		collection["name"] = "Mobile Phones";
 		collection["productList"] = productList;

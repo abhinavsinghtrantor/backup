@@ -30,9 +30,7 @@ export class UserServiceService {
     sessionStorage['accounts'] = JSON.stringify(accounts);
   }
 
-  logout(){
-    sessionStorage.clear();
-  }
+  
 
   getUserAadhar(){
     let user = JSON.parse(sessionStorage['user']);

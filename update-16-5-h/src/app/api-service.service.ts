@@ -80,6 +80,11 @@ export class ApiServiceService {
     return this.http.post(this.url+"http://localhost:3000/completeOrder", obj);
   }
 
+  logout(){
+    return this.http.post(this.url+"/logout").toPromise();
+    sessionStorage.clear();
+  }
+
   getAccountDetils(accNumber, type){
     if(sessionStorage.getItem("token") != undefined){
       this.token = sessionStorage.getItem("token");
@@ -110,26 +115,61 @@ export class ApiServiceService {
   }
 
   withdraw(amount, accNum, currency, cashBalance){
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }else{
+      window.location.href = "http://localhost:4200/";
+    }
+    let headers = new HttpHeaders(
+        { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+      );
     let aadharNum = this.userService.getUserAadhar();
     let data = {aadharNum: aadharNum, amount : amount, accountNum : accNum, currency : currency, cashBalance : cashBalance};
-    return this.http.post(this.url+"http://localhost:8080/withdraw", data);
+    data["url"] = "withdraw";
+    return this.http.post(this.url+"/bank", data, {headers : headers});
   }
 
   deposit(amount, accNum, currency, cashBalance){
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }else{
+      window.location.href = "http://localhost:4200/";
+    }
+    let headers = new HttpHeaders(
+        { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+      );
     let aadharNum = this.userService.getUserAadhar();
     let data = {aadharNum: aadharNum, amount : amount, accountNum : accNum, currency : currency, cashBalance : cashBalance};
-    return this.http.post(this.url+"http://localhost:8080/deposit", data);
+    data["url"] = "deposit";
+    return this.http.post(this.url+"/bank", data, {headers : headers});
   }
 
   billFetch(category, mobilenum, merName){
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }else{
+      window.location.href = "http://localhost:4200/";
+    }
+    let headers = new HttpHeaders(
+        { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+      );
     let data = {billerCategory: category, mobileNum:mobilenum, billMerchantName: merName};
-     return this.http.post(this.url+"http://localhost:8080/billFetch", data);
+    data["url"] = "billFetch";
+     return this.http.post(this.url+"/bank", data, {headers : headers});
     }
 
     payBill(fromAccountNum, toAccountNum, accType, amount, cashBalance){
+      if(sessionStorage.getItem("token") != undefined){
+        this.token = sessionStorage.getItem("token");
+      }else{
+        window.location.href = "http://localhost:4200/";
+      }
+      let headers = new HttpHeaders(
+          { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+        );
       let aadharNum = this.userService.getUserAadhar();
       let data = {aadharNum: aadharNum, fromAccountNum : fromAccountNum, toAccountNum: ""+toAccountNum, accType: accType, amount: amount, cashBalance : cashBalance};
-      return this.http.post(this.url+"http://localhost:8080/billPayment", data);
+      data["url"] = "billPayment";
+      return this.http.post(this.url+"/bank", data, {headers : headers});
     }
   }
-
