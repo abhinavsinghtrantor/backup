@@ -78,10 +78,10 @@ router.get('/getSubCategories/:cId', function(req, res, next){
 	var cId = req.params.cId;
 	if(cId.toLowerCase() == "electronics"){
 		var subCategories = [];
-	  	subCategories[0] = {name : "Mobile Phones", imgUrl : "", offer: "30% Off", r: "/ecom/"+cId+"/collection/mobile-phones"};
-	  	subCategories[1] = {name : "Pendrives", imgUrl : "", offer: "30% Off", r: "/collection/"+cId+"/pendrives"};
-	  	subCategories[2] = {name : "Cameras", imgUrl : "", offer: "30% Off", r: "/collection/"+cId+"/cameras"};
-	  	subCategories[3] = {name : "Headphones", imgUrl : "", offer: "30% Off", r: "/collection/"+cId+"/headphones"};
+	  	subCategories[0] = {name : "Mobile Phones", imgUrl : "mobile.jpg", offer: "30% Off", r: "/ecom/"+cId+"/collection/mobile-phones"};
+	  	subCategories[1] = {name : "Pendrives", imgUrl : "pendrive.jpg", offer: "30% Off", r: "/collection/"+cId+"/pendrives"};
+	  	subCategories[2] = {name : "Cameras", imgUrl : "camera.jpg", offer: "30% Off", r: "/collection/"+cId+"/cameras"};
+	  	subCategories[3] = {name : "Headphones", imgUrl : "headphones.jpeg", offer: "30% Off", r: "/collection/"+cId+"/headphones"};
 	}
 	res.json({msg : "success", name : cId, bannerUrl : "", subCategories : subCategories});
 })
@@ -91,17 +91,21 @@ router.get('/collection/:cId', function(req, res, next){
 	if(cId == "mobile-phones"){
 		var collection = {};
 		var productList = [];
-		  	productList[0] = {pId:"mobileP1", name : "1IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
+		  	productList[0] = {pId:"mobileP1", name : "Mobile 1", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
+		  						imgUrl : "mobile.jpg", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
 		  						rating: 1};
-		  	productList[1] = {pId:"mobileP2", name : "2IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
+		  	productList[1] = {pId:"mobileP2", name : "Mobile 2", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
+		  						imgUrl : "mobile.jpg", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
 		  						rating: 2};
-		  	productList[2] = {pId:"mobileP3", name : "3IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
+		  	productList[2] = {pId:"mobileP3", name : "Mobile 3", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
+		  						imgUrl : "mobile.jpg", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
 		  						rating: 3};
-		  	productList[3] = {pId:"mobileP4", name : "4IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1", rating: 4};
+		  	productList[3] = {pId:"mobileP4", name : "Mobile 4", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
+		  						imgUrl : "mobile.jpg", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1", rating: 4};
+				productList[4] = {pId:"mobileP5", name : "Mobile 5", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
+							  						imgUrl : "mobile.jpg", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1", rating: 4};
+			  productList[5] = {pId:"mobileP6", name : "Mobile 6", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
+																			imgUrl : "mobile.jpg", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1", rating: 4};
 		collection["name"] = "Mobile Phones";
 		collection["productList"] = productList;
 		res.json({msg : "success", data : collection});
@@ -115,8 +119,8 @@ router.get('/collection/:cId/product/:pId', function(req, res, next){
 	productDetials["dPrice"] = "Rs. 1000";
 	productDetials["aPrice"] = "Rs. 2000";
 	productDetials["discount"] = "50% Off";
-	productDetials["detail"] = ["Material : Cotton", "Fit : Regular Fit"];
-	productDetials["img"] = "";
+	productDetials["details"] = ["6.1-inch Liquid Retina display (LCD)", "IP67 water and dust resistant", "Face ID for secure authentication"];
+	productDetials["imgUrl"] = "mobile.jpg";
 	productDetials["pId"] = "mobileP1";
 	productDetials["rating"] = 1;
 

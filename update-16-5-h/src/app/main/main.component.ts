@@ -27,16 +27,16 @@ export class MainComponent implements OnInit {
   }
 
   init(){
-    this.bItems[0] = [{n: "Savings Accounts", r:"/bank/savings"}, {n: "Loan Accounts", r:"/bank/loan"}, {n:"Cash Deposit", r:"/bank/deposit"}];
-    this.bItems[1] = [{n: "Cash Withdraw", r:"/bank/withdraw"}, {n: "Bill Pay", r:"/bill-payment"}, {n:"Recharge", r:"/bank/recharge"}];
-    this.bItems[2] = [{n:"Buy Insurance", r:"/bank/insurance"}, {n:"Credit Cards", r:"/bank/cards"}, {n:"Mutual Funds", r:"/bank/mutual-funds"}];
-    this.bItems[3] = [{n: "Loan Enquiry", r:"/bank/loan-enquiry"}, {n:"Pay EMI", r:"/bank/pay-emi"}, {n:"More", r:"/bank/more"}];
+    this.bItems[0] = [{icon:"fa-university", n: "Savings Accounts", r:"/bank/savings"}, {icon:"fa-percent", n: "Loan Accounts", r:"/bank/loan"}, {icon:"fa-money", n:"Cash Deposit", r:"/bank/deposit"}];
+    this.bItems[1] = [{icon:"fa-money",n: "Cash Withdraw", r:"/bank/withdraw"}, {icon:"fa-file", n: "Bill Pay", r:"/bill-payment"}, {icon:"fa-mobile",n:"Recharge", r:"/bank/recharge"}];
+    this.bItems[2] = [{icon:"fa-industry", n:"Buy Insurance", r:"/bank/insurance"}, {icon:"fa-credit-card", n:"Credit Cards", r:"/bank/cards"}, {icon:"fa-bar-chart", n:"Mutual Funds", r:"/bank/mutual-funds"}];
+    this.bItems[3] = [{icon:"fa-percent", n: "Loan Enquiry", r:"/bank/loan-enquiry"}, {icon:"fa-share", n:"Pay EMI", r:"/bank/pay-emi"}, {icon:"fa-cubes", n:"More", r:"/bank/more"}];
 
     this.topOffersItems[0] = [{name: "Mobile Phones", offer : "30% Off"}, {name: "Men T-Shirts", offer : "50% Off"}]
     this.topOffersItems[1] = [{name: "Bluetooth Speakers", offer : "10% Cashback"}, {name: "Perfumes", offer : "25% Off"}]
 
-    this.shopCategories[0] = [{n: "Electronics", r: "/ecom/electronics"}, {n: "Men's Fashion", r: "/ecom/men-fashion"}, {n: "Women's Fashion", r: "/ecom/women-fashion"}];
-    this.shopCategories[1] = [{n: "Grocery", r: "/ecom/grocery"}, {n: "Household", r: "/ecom/household"}, {n: "Sports", r: "/ecom/sports"}];
+    this.shopCategories[0] = [{icon:"fa-mobile", n: "Electronics", r: "/ecom/electronics"}, {icon:"fa-mars", n: "Men's Fashion", r: "/ecom/men-fashion"}, {icon:"fa-venus", n: "Women's Fashion", r: "/ecom/women-fashion"}];
+    this.shopCategories[1] = [{icon:"fa-shopping-basket", n: "Grocery", r: "/ecom/grocery"}, {icon:"fa-shopping-cart", n: "Household", r: "/ecom/household"}, {icon:"fa-soccer-ball-o", n: "Sports", r: "/ecom/sports"}];
   }
 
   segmentChanged(ev: any) {

@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
 import { BservicesComponent } from './bservices/bservices.component';
 import { BillpaymentComponent } from './billpayment/billpayment.component';
+import { AuthService as AuthGuard } from './auth.service';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    component: MainComponent
+    component: MainComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -21,13 +23,16 @@ const routes: Routes = [
   },
   {
     path: 'bank/:type',
-    component: BservicesComponent
+    component: BservicesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'bill-payment',
-    component: BillpaymentComponent
+    component: BillpaymentComponent,
+    canActivate: [AuthGuard]
   },
-  { path: 'ecom/:category', loadChildren: './ecom/ecom.module#EcomPageModule' }
+  { path: 'ecom/:category', loadChildren: './ecom/ecom.module#EcomPageModule' },
+  { path: '**', redirectTo: '' }
 ];
 
 

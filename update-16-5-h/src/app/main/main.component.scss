@@ -1,6 +1,9 @@
+*{
+	color: #131313;
+}
 .top-container{
 	width: 100%;
-	background: #960303;
+	background: #bc3f3d;
 	padding-top: 10px;
 	padding-left:10px;
 	padding-right:10px;
@@ -48,6 +51,14 @@ h5{
 	margin-left: 5px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.banking{
+	padding-top: 1px;
+
+}
+.col a .fa{
+	color: #bc3f3d !important;
 }
 
 #map {

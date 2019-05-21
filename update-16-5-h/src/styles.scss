@@ -14,6 +14,10 @@ $themeColor: #bc3f3d;
 	}
 }
 
+.container-fluid{
+	padding-bottom: 40px;
+}
+
 .a-class{
 	margin-bottom: 10px;
 	float: left;
@@ -69,7 +73,7 @@ bk-modal {
 
         /* z-index must be higher than .jw-modal-background */
         z-index: 1000;
-        
+
         /* enables scrolling for tall modals */
         overflow: auto;
 
@@ -93,7 +97,7 @@ bk-modal {
         /* semi-transparent black  */
         background-color: #000;
         opacity: 0.75;
-        
+
         /* z-index must be below .jw-modal and above everything else  */
         z-index: 900;
     }

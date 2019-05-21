@@ -24,3 +24,15 @@
 .rating:before{
 	content: '★ ';
 }
+
+.card-title, .card-text{
+	color: #181818;
+}
+
+.d-price{
+	color: #bc3f3d;
+	font-weight: bold;
+}
+.a-price{
+	text-decoration: line-through;
+}

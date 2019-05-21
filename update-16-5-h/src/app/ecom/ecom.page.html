@@ -7,8 +7,13 @@
 		<a routerLink="{{subCategory.r}}" >
 		<div class="card" style="width: 100%;">
 		    <div class="card-body">
-		      <h5 class="card-title sub-name">{{subCategory.name}}</h5>
-		      <p class="card-text sub-offer">{{subCategory.offer}}</p>
+          <div class="left">
+            <img src="assets/{{subCategory.imgUrl}}" width="100%">
+          </div>
+          <div class="right">
+		          <h5 class="card-title sub-name">{{subCategory.name}}</h5>
+		            <p class="card-text sub-offer">{{subCategory.offer}}</p>
+          </div>
 		    </div>
 		  </div>
 		  </a>
