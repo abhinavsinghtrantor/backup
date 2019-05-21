@@ -10,11 +10,17 @@ export class EcomCartComponent implements OnInit {
 
   cart : any = {};
   products : any = [];
+  isCartEmpty: boolean;
   constructor(private api : ApiServiceService) { }
 
   ngOnInit() {
   	this.cart = this.api.getCart();
   	this.products = this.cart.products;
+    if(this.api.getCartCount() == 0){
+      this.isCartEmpty = true;
+    }else{
+      this.isCartEmpty = false;
+    }
   }
 
   deleteCart(pId){

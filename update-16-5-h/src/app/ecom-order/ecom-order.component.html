@@ -1,11 +1,12 @@
 <div class="header">
-  <div class="heading">Test App</div>
+  <div class="heading"><i class="fa fa-arrow-left" aria-hidden="true" (click)="back()"></i>Test App</div>
 </div>
 
 <div class="container-fluid">
 	<div class="card order-status">
 		<div class="card-body">
-			<div class="card-text">Your order has been placed succesfully</div>
+			<div class="card-text" *ngIf="status == 'complete'">Your order has been placed succesfully</div>
+			<div class="card-text" *ngIf="status == 'fail'">Your order has not been placed</div>
 		</div>
 	</div>
 

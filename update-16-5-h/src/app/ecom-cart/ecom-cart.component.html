@@ -1,9 +1,10 @@
 <div class="header">
-  <div class="heading">Test App</div>
+  <div class="heading"><i class="fa fa-arrow-left" aria-hidden="true" (click)="back()"></i>Test App</div>
 </div>
 
 <div class="container-fluid">
 <div style="margin-bottom: 60px;">
+  <div *ngIf = "isCartEmpty">Your cart is empty</div>
  <div class="card" style="width: 100%;" *ngFor="let prod of products">
     <div class="card-body">
       <div class="left">wwe</div>
@@ -23,8 +24,10 @@
 </div>
   <div class="bottom-bar">
   	<div class="left">Total Rs. {{cart.tPrice}}</div>
-  	<div class="right">
+  	<a routerLink = "/ecom/checkout/delivery/address">
+    <div class="right" *ngIf="!isCartEmpty">
   		<div class="button">Select Address</div>
   	</div>
+  </a>
   </div>
 </div>

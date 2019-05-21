@@ -68,6 +68,8 @@ router.post('/logout', function(req, res){
 		res.json({msg : "success"});
 });
 
+});
+
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
@@ -76,10 +78,10 @@ router.get('/getSubCategories/:cId', function(req, res, next){
 	var cId = req.params.cId;
 	if(cId.toLowerCase() == "electronics"){
 		var subCategories = [];
-	  	subCategories[0] = {name : "Mobile Phones", imgUrl : "", offer: "30% Off"};
-	  	subCategories[1] = {name : "Pendrives", imgUrl : "", offer: "30% Off"};
-	  	subCategories[2] = {name : "Cameras", imgUrl : "", offer: "30% Off"};
-	  	subCategories[3] = {name : "Headphones", imgUrl : "", offer: "30% Off"};
+	  	subCategories[0] = {name : "Mobile Phones", imgUrl : "", offer: "30% Off", r: "/ecom/"+cId+"/collection/mobile-phones"};
+	  	subCategories[1] = {name : "Pendrives", imgUrl : "", offer: "30% Off", r: "/collection/"+cId+"/pendrives"};
+	  	subCategories[2] = {name : "Cameras", imgUrl : "", offer: "30% Off", r: "/collection/"+cId+"/cameras"};
+	  	subCategories[3] = {name : "Headphones", imgUrl : "", offer: "30% Off", r: "/collection/"+cId+"/headphones"};
 	}
 	res.json({msg : "success", name : cId, bannerUrl : "", subCategories : subCategories});
 })
@@ -90,13 +92,16 @@ router.get('/collection/:cId', function(req, res, next){
 		var collection = {};
 		var productList = [];
 		  	productList[0] = {pId:"mobileP1", name : "1IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : ""};
+		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
+		  						rating: 1};
 		  	productList[1] = {pId:"mobileP2", name : "2IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : ""};
+		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
+		  						rating: 2};
 		  	productList[2] = {pId:"mobileP3", name : "3IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : ""};
+		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1",
+		  						rating: 3};
 		  	productList[3] = {pId:"mobileP4", name : "4IPhone X", aPrice : "Rs. 500", dPrice : "Rs. 400", offer : "30% Off",
-		  						imgUrl : ""};
+		  						imgUrl : "", r: "/ecom/electronics/collection/"+cId+"/product/mobileP1", rating: 4};
 		collection["name"] = "Mobile Phones";
 		collection["productList"] = productList;
 		res.json({msg : "success", data : collection});
@@ -107,14 +112,28 @@ router.get('/collection/:cId/product/:pId', function(req, res, next){
 	var cId = req.params.cId;
 	var pId = req.params.pId;
 	var productDetials = {title : "Enchanted Drapes Men Regular Fit Casual shirt - Brown"};
-	productDetials["dPrice"] = 1000;
-	productDetials["aPrice"] = 2000;
-	productDetials["discount"] = "50%";
+	productDetials["dPrice"] = "Rs. 1000";
+	productDetials["aPrice"] = "Rs. 2000";
+	productDetials["discount"] = "50% Off";
 	productDetials["detail"] = ["Material : Cotton", "Fit : Regular Fit"];
 	productDetials["img"] = "";
 	productDetials["pId"] = "mobileP1";
+	productDetials["rating"] = 1;
 
 	res.json({msg : "success", productDetails : productDetials});
+});
+
+router.post('/updateRating', function(req, res, next){
+	var pId = req.body.pId;
+	var rating = req.body.rating;
+	var currentRating = 4;
+	var currentRaters = 10;
+	currentRating = currentRating * currentRaters;
+	currentRaters = currentRaters + 1;
+	currentRating = currentRating + rating;
+	currentRating = Math.round(currentRating/currentRaters);
+	// update rating in db
+	return res.json({msg : 'success', rating : currentRating});
 });
 
 router.get('/getAddress', function(req, res, next){
@@ -150,12 +169,12 @@ router.get('/applyCoupon', function(req, res, next){
 	res.json({msg : "success"});
 });
 
-router.get('/completeOrder', function(req, res, next){
+router.post('/completeOrder', function(req, res, next){
 	var cart = req.body.cart;
 	var addressId = req.body.addressId;
 	var payMode = "";
 	var isPaySuccess = true;
-	res.json({msg : "success"});
+	res.json({msg : "success", orderId : "1"});
 });
 
 router.get('/trackOrder', function(req, res, next){

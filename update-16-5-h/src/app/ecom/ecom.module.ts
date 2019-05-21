@@ -12,18 +12,19 @@ import { EcomDelAddressComponent } from '../ecom-del-address/ecom-del-address.co
 import { EcomDelPaymentComponent } from '../ecom-del-payment/ecom-del-payment.component';
 import { EcomOrderComponent } from '../ecom-order/ecom-order.component';
 import { EcomTrackComponent } from '../ecom-track/ecom-track.component';
+import { RatingComponent } from '../rating/rating.component';
 
 const routes: Routes = [
   {
     path: '',
     component: EcomPage
   },
-  {path: 'product', component: EcomProductComponent},
-  {path: 'product/detail', component: EcomProductDetailComponent},
+  {path: 'collection/:cId', component: EcomProductComponent},
+  {path: 'collection/:cId/product/:pId', component: EcomProductDetailComponent},
   {path: 'cart', component: EcomCartComponent},
   {path: 'delivery/address', component: EcomDelAddressComponent},
   {path: 'delivery/payment', component: EcomDelPaymentComponent},
-  {path: 'order', component: EcomOrderComponent},
+  {path: 'order/:orderId/:status', component: EcomOrderComponent},
   {path: 'track', component: EcomTrackComponent},
 ];
 
@@ -34,6 +35,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [EcomPage, EcomProductComponent, EcomProductDetailComponent, EcomCartComponent,
-  EcomDelAddressComponent, EcomDelPaymentComponent, EcomOrderComponent, EcomTrackComponent]
+  EcomDelAddressComponent, EcomDelPaymentComponent, EcomOrderComponent, EcomTrackComponent,
+  RatingComponent]
 })
 export class EcomPageModule {}

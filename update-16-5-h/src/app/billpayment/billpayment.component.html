@@ -61,3 +61,9 @@
     </div>
     <div class="bottom-box" (click)="payBill()">PAY</div>
 </div>
+
+<bk-modal id="bank-modal">
+    <h5>{{mHeading}}</h5>
+    <p>{{mBody}}</p>
+    <button (click)="closeModal('bank-modal');">Close</button>
+</bk-modal>

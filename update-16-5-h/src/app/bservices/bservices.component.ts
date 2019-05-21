@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { UserServiceService } from '../user-service.service';
 import { ApiServiceService } from '../api-service.service';
+import { ModalserviceService } from '../modalservice.service';
 
 @Component({
   selector: 'app-bservices',
@@ -32,10 +33,14 @@ export class BservicesComponent implements OnInit {
   depositAmount: number = 0;
   wAccount: string = "";
   dAccount: string = "";
+  mHeading: string;
+  mBody: string;
 
 
   constructor(private route: ActivatedRoute,
-  private router: Router, private userService: UserServiceService, private api : ApiServiceService) { }
+  private router: Router, private userService: UserServiceService, 
+  private api : ApiServiceService,
+  private modalService: ModalserviceService) { }
 
   ngOnInit() {
     this.withdrawAmount = 0;
@@ -122,8 +127,13 @@ export class BservicesComponent implements OnInit {
     this.api.withdraw(""+this.withdrawAmount, this.wAccount, currency, ""+cashBalance).subscribe((data: any) => {
       if(data.status == "Success"){
         this.userService.updateAccount(this.wAccount, data.balance);
+        this.mHeading = "Amount Withdrawn successfully"
+        this.mBody = "Your withdraw request has been completed successfully."
+        this.modalService.open("bank-modal");
       }else{
-
+        this.mHeading = "Withdraw Failed"
+        this.mBody = "Please try again."
+        this.modalService.open("bank-modal");
       }
     })
   }
@@ -136,8 +146,13 @@ export class BservicesComponent implements OnInit {
     this.api.deposit(""+this.depositAmount, this.dAccount, currency, ""+cashBalance).subscribe((data: any) => {
       if(data.status == "Success"){
         this.userService.updateAccount(this.dAccount, data.balance);
+        this.mHeading = "Amount deposited successfully"
+        this.mBody = "Your deposit request has been completed successfully."
+        this.modalService.open("bank-modal");
       }else{
-        
+        this.mHeading = "Deposit Failed"
+        this.mBody = "Please try again."
+        this.modalService.open("bank-modal");
       }
     })
   }

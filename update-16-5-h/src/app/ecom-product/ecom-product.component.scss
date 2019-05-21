@@ -5,3 +5,22 @@
 	padding-right: 5px;
 	padding-left: 5px;
 }
+
+.rating{
+	width: 10px;
+    padding: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 1.2;
+    color: #ddd;
+}
+
+.active{
+	color: gold;
+}
+
+.rating:before{
+	content: '★ ';
+}

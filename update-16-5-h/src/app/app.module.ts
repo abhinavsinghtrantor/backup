@@ -15,11 +15,11 @@ import { EcomTrackComponent } from './ecom-track/ecom-track.component';
 import { LoginComponent } from './login/login.component';
 import { BservicesComponent } from './bservices/bservices.component';
 import { BillpaymentComponent } from './billpayment/billpayment.component';
-
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent, MainComponent, LoginComponent, BservicesComponent, BillpaymentComponent
+    AppComponent, MainComponent, LoginComponent, BservicesComponent, BillpaymentComponent, ModalComponent
   ],
   imports: [
     BrowserModule,

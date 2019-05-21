@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ecom-del-address',
@@ -20,7 +21,7 @@ export class EcomDelAddressComponent implements OnInit {
   state : String;
   pincode : String;
 
-  constructor(private api : ApiServiceService) { }
+  constructor(private api : ApiServiceService, private router: Router) { }
 
   ngOnInit() {
     this.api.getAddress().subscribe((data: any) => {this.address = data.address});
@@ -31,6 +32,7 @@ export class EcomDelAddressComponent implements OnInit {
   		this.highlight[i] = false;
   	}
   	this.highlight[0] = true;
+    this.router.navigate(['/ecom/checkout/delivery/payment']);
   }
 
   newAddress(){
@@ -51,6 +53,9 @@ export class EcomDelAddressComponent implements OnInit {
       state : this.state,
       pincode : this.pincode
     }
-    this.api.saveAddress(nAddressObj).subscribe((data: any) => {console.log(data)});
+    this.api.saveAddress(nAddressObj).subscribe((data: any) => {
+      console.log(data);
+      this.router.navigate(['/ecom/checkout/delivery/payment']);
+    });
   }
 }

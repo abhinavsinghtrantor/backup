@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ecom-del-payment',
@@ -8,19 +9,40 @@ import { ApiServiceService } from '../api-service.service';
 })
 export class EcomDelPaymentComponent implements OnInit {
 
-  payMode : String = "";
-  constructor(private api : ApiServiceService) { }
+  payMode : String;
+  isPayOnline: boolean;
+  isPayCod: boolean;
+  constructor(private api : ApiServiceService, private router: Router) { }
 
   ngOnInit() {
+    this.payMode = "";
   }
 
   selectPayMode(mode){
   	this.payMode = mode;
-  	console.log(mode);
+    if(mode == 'online'){
+      this.isPayOnline = true;
+      this.isPayCod = false;
+    }else{
+      this.isPayOnline = false;
+      this.isPayCod = true;
+    }
   }
 
   completeOrder(){
-  	this.api.completeOrder(this.payMode).subscribe((data: any) => {console.log(data)});
+    if(this.payMode.length > 0){
+  	this.api.completeOrder(this.payMode).subscribe((data: any) => {
+      let orderId = data.orderId;
+      if(data.msg == "success"){
+        delete sessionStorage['cart'];
+        this.router.navigate(['/ecom/checkout/order/'+orderId+'/complete'])
+      }else{
+        this.router.navigate(['/ecom/checkout/order/'+orderId+'/fail'])
+      }
+    });
+  }else{
+    alert('Select payment mode');
+  }
   }
   
 

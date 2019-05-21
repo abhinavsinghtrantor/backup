@@ -1,18 +1,18 @@
 <div class="header">
-  <div class="heading">Test App</div>
+  <div class="heading"><i class="fa fa-arrow-left" aria-hidden="true" (click)="back()"></i>Test App</div>
 </div>
 
 <div class="container-fluid">
 	<h5>Select you payment</h5>
 	<div class="payment-container">
-		<div class="card" (click) = "selectPayMode('online')">
+		<div class="card" (click) = "selectPayMode('online')" [class.highlight] = "isPayOnline">
 			<div class="card-body">
 				<div class="card-text">
 					Online Payment
 				</div>
 			</div>
 		</div>
-		<div class="card" (click) = "selectPayMode('cod')">
+		<div class="card" (click) = "selectPayMode('cod')" [class.highlight] = "isPayCod">
 			<div class="card-body">
 				<div class="card-text">
 					Cash on Delivery
@@ -49,7 +49,7 @@
 		  </div>
 	</div>
 
-	<div class="bottom-bar">
+	<div class="bottom-bar" (click) = "completeOrder()">
 		<div class="button">Place Order</div>
 	</div>
 </div>

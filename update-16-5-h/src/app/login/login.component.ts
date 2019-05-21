@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
+import { ModalserviceService } from '../modalservice.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
@@ -16,10 +17,13 @@ export class LoginComponent implements OnInit {
   otp: string = "";
   isAadharInValid: boolean = false;
   isOtpInvalid: boolean = false;
+  mHeading: string;
+  mBody: string;
 
   constructor(private userService: UserServiceService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private modalService: ModalserviceService) { }
 
   ngOnInit() {
     if(sessionStorage.getItem("token") != undefined){
@@ -28,6 +32,8 @@ export class LoginComponent implements OnInit {
     if(this.userService.isUserLogin){
       this.isLogin = true;
     }
+    this.mHeading = "Login Failed"
+    this.mBody = "Please try again."
   };
 
   login(type){
@@ -87,5 +93,13 @@ export class LoginComponent implements OnInit {
       this.isOtpInvalid = false;
     }
   }
+
+  openModal(id: string) {
+        this.modalService.open(id);
+    }
+
+    closeModal(id: string) {
+        this.modalService.close(id);
+    }
 
 }

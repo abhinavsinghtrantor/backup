@@ -1,3 +1,4 @@
+declare var google : any;
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -34,8 +35,8 @@ export class MainComponent implements OnInit {
     this.topOffersItems[0] = [{name: "Mobile Phones", offer : "30% Off"}, {name: "Men T-Shirts", offer : "50% Off"}]
     this.topOffersItems[1] = [{name: "Bluetooth Speakers", offer : "10% Cashback"}, {name: "Perfumes", offer : "25% Off"}]
 
-    this.shopCategories[0] = ["Electronics", "Men's Fashion", "Women's Fashion"];
-    this.shopCategories[1] = ["Grocery", "Household", "Sports"];
+    this.shopCategories[0] = [{n: "Electronics", r: "/ecom/electronics"}, {n: "Men's Fashion", r: "/ecom/men-fashion"}, {n: "Women's Fashion", r: "/ecom/women-fashion"}];
+    this.shopCategories[1] = [{n: "Grocery", r: "/ecom/grocery"}, {n: "Household", r: "/ecom/household"}, {n: "Sports", r: "/ecom/sports"}];
   }
 
   segmentChanged(ev: any) {

@@ -34,3 +34,9 @@
 
   <div class="bottom-box" (click)="authenticate()">NEXT</div>
 </div>
+
+<bk-modal id="login-modal" [msg]="hello">
+    <h5>{{mHeading}}</h5>
+    <p>{{mBody}}</p>
+    <button (click)="closeModal('login-modal');">Close</button>
+</bk-modal>

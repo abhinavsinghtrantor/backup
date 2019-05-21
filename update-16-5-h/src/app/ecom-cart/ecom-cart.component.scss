@@ -28,7 +28,7 @@
 }
 
 .bottom-bar{
-	background: red;
+	background: #131313;
 	color: #ffffff;
 	position: fixed;
 	bottom: 0;
@@ -43,5 +43,11 @@
 		float: left;
 		width: 50%;
 		text-align: right;
+		background: #bc3f3d;
+		padding: 5px;
+		text-align: center;
+	}
+	.button{
+		color: #ffffff;
 	}
 }

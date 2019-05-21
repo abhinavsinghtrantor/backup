@@ -28,8 +28,8 @@
 <div class="bottom-container">
     <h4>Shop Online</h4>
     <div class="row" *ngFor="let items of shopCategories">
-      <div class="col col1">{{items[0]}}</div>
-      <div class="col">{{items[1]}}</div>
+      <div class="col col1"><div style="text-align: center"><a routerLink="{{items[0].r}}" >{{items[0].n}}</a></div></div>
+      <div class="col"><div style="text-align: center"><a routerLink="{{items[1].r}}" >{{items[1].n}}</a></div></div>
   </div>
 </div>
 

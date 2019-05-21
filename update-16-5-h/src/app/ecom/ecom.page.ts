@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ecom',
@@ -9,20 +10,29 @@ import { ApiServiceService } from '../api-service.service';
 export class EcomPage implements OnInit {
 
   category : any = {};
+  sub: any;
+  categoryId: string;
 
-  constructor(private api : ApiServiceService) { }
+  constructor(private api : ApiServiceService, private aRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-  	let subCategories = [];
-  	subCategories[0] = {name : "Mobile Phones", imgUrl : "", offer: "30% Off"};
-  	subCategories[1] = {name : "Pendrives", imgUrl : "", offer: "30% Off"};
-  	subCategories[2] = {name : "Cameras", imgUrl : "", offer: "30% Off"};
-  	subCategories[3] = {name : "Headphones", imgUrl : "", offer: "30% Off"};
-
+    this.sub = this.aRoute.params.subscribe(params => {
+       this.categoryId = params['category']; 
+    });
+    let subCategories = [];
   	
-    this.api.getSubCategories("electronics").subscribe((data: any) => {
+    this.api.getSubCategories(this.categoryId).subscribe((data: any) => {
       this.category = {"name" : data.name, bannerUrl : data.bannerUrl, subCategories : data.subCategories};
     });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  back(){
+    this.router.navigate(['/main'])
   }
 
 }

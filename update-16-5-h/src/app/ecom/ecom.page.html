@@ -1,17 +1,16 @@
 <div class="header">
-  <div class="heading">Test App</div>
+  <div class="heading"><i class="fa fa-arrow-left" aria-hidden="true" (click)="back()"></i>Test App</div>
 </div>
 <div class="container-fluid">
-	<div class="card search-ecom">
-		<input type="search" placeholder="Search here" />
-	</div>
 	<h5>Top Categories</h5>
 	<div *ngFor="let subCategory of category.subCategories">
+		<a routerLink="{{subCategory.r}}" >
 		<div class="card" style="width: 100%;">
 		    <div class="card-body">
 		      <h5 class="card-title sub-name">{{subCategory.name}}</h5>
 		      <p class="card-text sub-offer">{{subCategory.offer}}</p>
 		    </div>
 		  </div>
+		  </a>
 	</div>
 </div>

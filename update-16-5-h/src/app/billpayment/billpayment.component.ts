@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { ApiServiceService } from '../api-service.service';
+import { ModalserviceService } from '../modalservice.service';
 
 @Component({
   selector: 'app-billpayment',
@@ -22,8 +23,11 @@ export class BillpaymentComponent implements OnInit {
   account: string = "";
   toAccount: string = "";
   amount: string = "";
+  mHeading: string;
+  mBody: string;
 
-  constructor(private api : ApiServiceService,  private userService: UserServiceService) { }
+  constructor(private api : ApiServiceService,  private userService: UserServiceService,
+    private modalService: ModalserviceService) { }
 
   ngOnInit() {
 
@@ -78,8 +82,13 @@ export class BillpaymentComponent implements OnInit {
   	this.api.payBill(this.account, this.toAccount, "savings", this.amount, accDetails.balance).subscribe((data: any) => {
   		if(data.status == "Success"){
   			this.userService.updateAccount(this.account, data.balance);
+        this.mHeading = "Bill payed successfully"
+        this.mBody = "your bill has been paid successfully"
+        this.modalService.open("bank-modal");
   		}else{
-  			
+  			this.mHeading = "Bill Payment Failed"
+        this.mBody = "Please try again."
+        this.modalService.open("bank-modal");
   		}
   	})
   }

@@ -27,7 +27,7 @@ const routes: Routes = [
     path: 'bill-payment',
     component: BillpaymentComponent
   },
-  { path: 'ecom', loadChildren: './ecom/ecom.module#EcomPageModule' }
+  { path: 'ecom/:category', loadChildren: './ecom/ecom.module#EcomPageModule' }
 ];
 
 

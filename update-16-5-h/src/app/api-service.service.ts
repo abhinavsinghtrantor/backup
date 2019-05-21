@@ -20,19 +20,24 @@ export class ApiServiceService {
   }
 
   getProducts(cId){
-  	return this.http.get(this.url+"http://localhost:3000/collection/"+cId);
+  	return this.http.get(this.url+"/collection/"+cId);
   };
 
   getProductDetail(cId, pId){
-  	return this.http.get(this.url+"http://localhost:3000/collection/"+cId+"/product/"+pId);
+  	return this.http.get(this.url+"/collection/"+cId+"/product/"+pId);
   };
 
   getAddress(){
-  	return this.http.get(this.url+"http://localhost:3000/getAddress");
+  	return this.http.get(this.url+"/getAddress");
   }
 
   saveAddress(obj){
-  	return this.http.post(this.url+"http://localhost:3000/saveAddress", obj);
+  	return this.http.post(this.url+"/saveAddress", obj);
+  }
+
+  updateRating(pId, rating){
+    let obj = {pId : pId, rating : rating};
+    return this.http.post(this.url+"/updateRating", obj).toPromise();
   }
 
   saveCart(product){
@@ -77,11 +82,11 @@ export class ApiServiceService {
     let cart = JSON.parse(sessionStorage["cart"]);
     let addressId = sessionStorage["addressId"];
     let obj = {cart : cart, addressId : addressId};
-    return this.http.post(this.url+"http://localhost:3000/completeOrder", obj);
+    return this.http.post(this.url+"/completeOrder", obj);
   }
 
   logout(){
-    return this.http.post(this.url+"/logout").toPromise();
+    //return this.http.post(this.url+"/logout").toPromise();
     sessionStorage.clear();
   }
 
