@@ -17,6 +17,7 @@ import { BservicesComponent } from './bservices/bservices.component';
 import { BillpaymentComponent } from './billpayment/billpayment.component';
 import { ModalComponent } from './modal/modal.component';
 import { LogoutComponent } from './logout/logout.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LogoutComponent } from './logout/logout.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

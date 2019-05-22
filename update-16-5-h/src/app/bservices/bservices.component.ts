@@ -4,6 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { UserServiceService } from '../user-service.service';
 import { ApiServiceService } from '../api-service.service';
 import { ModalserviceService } from '../modalservice.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-bservices',
@@ -40,7 +41,8 @@ export class BservicesComponent implements OnInit {
   constructor(private route: ActivatedRoute,
   private router: Router, private userService: UserServiceService, 
   private api : ApiServiceService,
-  private modalService: ModalserviceService) { }
+  private modalService: ModalserviceService,
+  private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.withdrawAmount = 0;
@@ -81,7 +83,9 @@ export class BservicesComponent implements OnInit {
   };
 
   showAccountDetails(accNumber, type){
+    this.spinner.show();
     this.api.getAccountDetils(accNumber, type).subscribe((data: any) => {
+      this.spinner.hide();
       this.userService.storeAccountDetails(accNumber, data);
       if(type == "Savings"){
       this.accBalance = data.balance;
@@ -121,10 +125,12 @@ export class BservicesComponent implements OnInit {
   }
 
   submitWithdraw(){
+    this.spinner.show();
     let accDetails = this.userService.getAccountDetails(this.wAccount);
     let currency = accDetails.currencyCode;
     let cashBalance = accDetails.balance;
     this.api.withdraw(""+this.withdrawAmount, this.wAccount, currency, ""+cashBalance).subscribe((data: any) => {
+      this.spinner.hide();
       if(data.status == "Success"){
         this.userService.updateAccount(this.wAccount, data.balance);
         this.mHeading = "Amount Withdrawn successfully"
@@ -139,11 +145,13 @@ export class BservicesComponent implements OnInit {
   }
 
   submitDeposit(){
+    this.spinner.show();
     let accDetails = this.userService.getAccountDetails(this.dAccount);
     let currency = accDetails.currencyCode;
     let cashBalance = accDetails.balance;
-    console.log("hello")
+    
     this.api.deposit(""+this.depositAmount, this.dAccount, currency, ""+cashBalance).subscribe((data: any) => {
+      this.spinner.hide();
       if(data.status == "Success"){
         this.userService.updateAccount(this.dAccount, data.balance);
         this.mHeading = "Amount deposited successfully"

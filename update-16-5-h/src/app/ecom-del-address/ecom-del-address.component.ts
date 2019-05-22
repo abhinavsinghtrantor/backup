@@ -54,7 +54,8 @@ export class EcomDelAddressComponent implements OnInit {
       pincode : this.pincode
     }
     this.api.saveAddress(nAddressObj).subscribe((data: any) => {
-      console.log(data);
+      let addressId = data.addressId;
+      sessionStorage["addressId"] = addressId;
       this.router.navigate(['/ecom/checkout/delivery/payment']);
     });
   }

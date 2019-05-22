@@ -11,6 +11,7 @@ var products = {};
 var collections = {};
 var categories = {};
 var offers = {};
+var orders = {};
 
 init();
 
@@ -101,6 +102,14 @@ router.post('/bank', function(req, res){
     }
   });
 
+})
+
+router.post('/getNearbyLocation', function(req, res){
+	var coords = req.body.coords;
+	var store1 = {lat: 19.228825, lng: 72.854118};
+  	var store2 = {lat: 19.226825, lng: 72.853118};
+  	var store3 = {lat: 19.224825, lng: 72.855118};
+  	res.json({msg : "success", stores : [store1, store2, store3]});
 })
 
 router.post('/logout', function(req, res){
@@ -233,7 +242,7 @@ router.post('/saveAddress', function(req, res, next){
 		user.adresses = userAddresses;
 
 		users[userId] = user;
-		res.json({msg : "success", completeAddress : completeAddress});
+		res.json({msg : "success", addressId : addressId});
 	});
 });
 
@@ -250,15 +259,21 @@ router.post('/completeOrder', function(req, res, next){
 
 		var cart = req.body.cart;
 		var addressId = req.body.addressId;
-		var payMode = "";
+		var payMode = req.body.payMode;
 		var isPaySuccess = true;
-		res.json({msg : "success", orderId : "1"});
+		orders["OD001"] = {orderId: "OD001", cart : cart, addressId : addressId, payMode : payMode, date : new Date(), status : "Received"};
+		res.json({msg : "success", orderId : "OD001"});
+		setTimeout(function(){
+			var order = orders["OD001"];
+			order['status'] = "Shipped";
+		}, 5000)
 	});
 });
 
-router.get('/trackOrder', function(req, res, next){
+router.post('/trackOrder', function(req, res, next){
 	var orderId = req.body.orderId;
-	res.json({msg : "success", "status" : "Processing"});
+	var order = orders[orderId];
+	return res.json({msg : "success", "order": order});
 });
 
 function init(){
@@ -298,9 +313,9 @@ function init(){
 
 	categories["electronics"] = subCategories;
 
-	var productDetials = {title : "Enchanted Drapes Men Regular Fit Casual shirt - Brown"};
-	productDetials["dPrice"] = "Rs. 1000";
-	productDetials["aPrice"] = "Rs. 2000";
+	var productDetials = {title : "Mobile Phone - XYZ - Grey Color"};
+	productDetials["dPrice"] = 1000;
+	productDetials["aPrice"] = 2000;
 	productDetials["discount"] = "50% Off";
 	productDetials["details"] = ["6.1-inch Liquid Retina display (LCD)", "IP67 water and dust resistant", "Face ID for secure authentication"];
 	productDetials["imgUrl"] = "mobile.jpg";

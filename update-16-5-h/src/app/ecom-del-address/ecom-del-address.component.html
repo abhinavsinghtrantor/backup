@@ -26,27 +26,27 @@
 			</div>
 			<div class="f-mobile form-element">
 				<div class="label">Enter Mobile</div>
-				<input type="mobile" placeholder="Enter Mobile" />
+				<input type="mobile" placeholder="Enter Mobile" [(ngModel)] = "mobile"/>
 			</div>
 			<div class="f-address1 form-element">
 				<div class="label">Enter Address</div>
-				<input type="text" placeholder="Enter House Number" />
+				<input type="text" placeholder="Enter House Number" [(ngModel)] = "address1"/>
 			</div>
 			<div class="f-address2 form-element">
 				<div class="label">Enter Address</div>
-				<input type="text" placeholder="Enter Street/Area" />
+				<input type="text" placeholder="Enter Street/Area" [(ngModel)] = "address2"/>
 			</div>
 			<div class="f-pincode form-element">
 				<div class="label">Enter Pincode</div>
-				<input type="number" placeholder="Enter Pincode" />
+				<input type="number" placeholder="Enter Pincode" [(ngModel)] = "pincode"/>
 			</div>
 			<div class="f-city form-element">
 				<div class="label">Enter City</div>
-				<input type="text" placeholder="Enter City" />
+				<input type="text" placeholder="Enter City" [(ngModel)] = "city"/>
 			</div>
 			<div class="f-state form-element" style="margin-bottom: 50px;">
 				<div class="label">Enter State</div>
-				<input type="text" placeholder="Enter State" />
+				<input type="text" placeholder="Enter State" [(ngModel)] = "state"/>
 			</div>
 			<div class="button" (click) = "saveNewAddress()">SAVE</div>
 		</div>

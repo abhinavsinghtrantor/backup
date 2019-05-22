@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { ApiServiceService } from '../api-service.service';
 import { ModalserviceService } from '../modalservice.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-billpayment',
@@ -27,7 +28,8 @@ export class BillpaymentComponent implements OnInit {
   mBody: string;
 
   constructor(private api : ApiServiceService,  private userService: UserServiceService,
-    private modalService: ModalserviceService) { }
+    private modalService: ModalserviceService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
 
@@ -54,8 +56,10 @@ export class BillpaymentComponent implements OnInit {
   	this.isError = false;
   	var reg = /^\d+$/;
     if(reg.test(this.mobileNum)){
+      this.spinner.show();
     	this.api.billFetch(this.billCategory, this.mobileNum, this.merchant).subscribe((data: any) => {
-    		if(data.status == "Success"){
+    		this.spinner.hide();
+        if(data.status == "Success"){
     			this.billDetails = data;
     			delete this.billDetails["status"];
     			delete this.billDetails["Description"];
@@ -78,9 +82,11 @@ export class BillpaymentComponent implements OnInit {
   }
 
   payBill(){
+    this.spinner.show();
   	let accDetails = this.userService.getAccountDetails(this.account);
   	this.api.payBill(this.account, this.toAccount, "savings", this.amount, accDetails.balance).subscribe((data: any) => {
-  		if(data.status == "Success"){
+  		this.spinner.hide();
+      if(data.status == "Success"){
   			this.userService.updateAccount(this.account, data.balance);
         this.mHeading = "Bill payed successfully"
         this.mBody = "your bill has been paid successfully"

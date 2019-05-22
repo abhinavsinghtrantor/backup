@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { ModalserviceService } from '../modalservice.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserServiceService,
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: ModalserviceService) { }
+    private modalService: ModalserviceService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     if(sessionStorage.getItem("token") != undefined){
@@ -56,7 +58,9 @@ export class LoginComponent implements OnInit {
   authenticate(){
     var reg = /^\d+$/;
     if(reg.test(this.otp)){
+      this.spinner.show();
       this.userService.userAuthenticate(this.aadharNum, this.otp).subscribe((data: any) => {
+        this.spinner.hide();
         if(data.status == "Fail"){
           this.isAadharInValid = true;
           this.back("aadhar");

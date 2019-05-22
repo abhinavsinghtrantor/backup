@@ -31,18 +31,15 @@
 
 	<div class="cart-container">
 		<h5>Cart</h5>
-		<div class="card" style="width: 100%;">
+		<div class="card" style="width: 100%;" *ngFor="let prod of products">
 		    <div class="card-body">
-		      <div class="left">wwe</div>
+		      <div class="left"><img src="assets/{{prod.imgUrl}}" width="50%" /></div>
 		      <div class="right">
-		      	<div class="title">Enchanted Drapes Men Regular Fit Casual shirt - Brown</div>
+		      	<div class="title">{{prod.title}}</div>
 		      	<div class="price">
-		      		<div class="d-price">Rs. 1000</div>
-		      		<div class="a-price">
-		      			<span>Rs. 2000</span>
-		      			<span>50% Off</span>
-		      		</div>
+		      		<div class="d-price">Rs. {{prod.dPrice}}</div>
 		      	</div>
+		        <div class="cart-remove" (click)="deleteCart(prod.pId)">Remove</div>
 		      </div>
 		    </div>
 		  </div>

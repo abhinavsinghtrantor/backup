@@ -2,6 +2,7 @@ declare var google : any;
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { LogoutComponent } from '../logout/logout.component';
+import { ApiServiceService } from '../api-service.service';
 
 @Component({
   selector: 'app-main',
@@ -17,7 +18,7 @@ export class MainComponent implements OnInit {
   isShopVisible: boolean = false;
   @ViewChild('logt') logt:LogoutComponent;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private api: ApiServiceService) { }
 
   ngOnInit() {
   	if(sessionStorage.getItem("token") == undefined){
@@ -60,12 +61,31 @@ export class MainComponent implements OnInit {
 
   initMap() {
   // The location of Uluru
-  var store1 = {lat: 19.228825, lng: 72.854118};
-  var store2 = {lat: 19.226825, lng: 72.853118};
-  var store3 = {lat: 19.224825, lng: 72.855118};
+  var userLocation = {lat: 19.228825, lng: 72.855118};
+  let stores;
+  this.api.getNearby(userLocation).subscribe((data: any) => {
+    stores = data.stores;
+  
+  var store1 = stores[0];
+  var store2 = stores[1];
+  var store3 = stores[2];
+  
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 16, center: store1, disableDefaultUI: true});
+      document.getElementById('map'), {zoom: 16, center: userLocation, disableDefaultUI: true});
+
+  var cityCircle = new google.maps.Circle({
+            strokeColor: 'blue',
+            strokeOpacity: 1,
+            strokeWeight: 2,
+            fillColor: '#0067c1',
+            fillOpacity: 1,
+            map: map,
+            center: userLocation,
+            radius: 20
+          });
+
+  
   // The marker, positioned at Uluru
   var marker1 = new google.maps.Marker({position: store1, map: map});
   var marker2 = new google.maps.Marker({position: store2, map: map});
@@ -97,6 +117,7 @@ export class MainComponent implements OnInit {
         infowindow1.open(map, marker1);
         infowindow2.open(map, marker2);
         infowindow3.open(map, marker3);
+        })
 }
 
 logout(){

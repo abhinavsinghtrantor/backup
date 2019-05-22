@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from '../api-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ecom-track',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EcomTrackComponent implements OnInit {
 
-  constructor() { }
+  orderId : string;
+  mobile : string;
+  constructor(private api : ApiServiceService, private router: Router) { }
 
   ngOnInit() {
+  	
+  }
+
+  track(){
+  	this.router.navigate(['/ecom/checkout/order/'+this.orderId+"/track"]);
   }
 
 }

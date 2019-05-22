@@ -12,10 +12,14 @@ export class EcomDelPaymentComponent implements OnInit {
   payMode : String;
   isPayOnline: boolean;
   isPayCod: boolean;
+  cart : any;
+  products : any;
   constructor(private api : ApiServiceService, private router: Router) { }
 
   ngOnInit() {
     this.payMode = "";
+    this.cart = this.api.getCart();
+    this.products = this.cart.products;
   }
 
   selectPayMode(mode){

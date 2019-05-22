@@ -13,27 +13,26 @@
 	<div class="card">
 		<div class="card-body">
 			<div class="card-text">
-				<div class="">OrderId: </div>
-				<div class="">Order Date: </div>
-				<div class="">Order Status: </div>
+				<div class="" style="float: left; width: 100%"><div style="float: left; width: 40%; padding-left:5px;">OrderId: </div><div style="float: left; width: 60%; padding-right:5px; text-align: right">{{order.orderId}}sdsd</div></div>
+
+				<div class=""><div style="float: left; width: 40%; padding-left:5px;">Order Date:</div> <div style="float: left; width: 60%; padding-right:5px; text-align: right">{{order.date}}</div></div>
+				<div class=""><div style="float: left; width: 40%; padding-left:5px;">Order Status:</div> <div style="float: left; width: 60%; padding-right:5px; text-align: right">{{order.status}}</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 	<div class="cart-container">
 		<h5>Cart</h5>
-		<div class="card" style="width: 100%;">
+		<div class="card" style="width: 100%;" *ngFor="let prod of products">
 		    <div class="card-body">
-		      <div class="left">wwe</div>
+		      <div class="left"><img src="assets/{{prod.imgUrl}}" width="50%" /></div>
 		      <div class="right">
-		      	<div class="title">Enchanted Drapes Men Regular Fit Casual shirt - Brown</div>
+		      	<div class="title">{{prod.title}}</div>
 		      	<div class="price">
-		      		<div class="d-price">Rs. 1000</div>
-		      		<div class="a-price">
-		      			<span>Rs. 2000</span>
-		      			<span>50% Off</span>
-		      		</div>
+		      		<div class="d-price">Rs. {{prod.dPrice}}</div>
 		      	</div>
+		        <div class="cart-remove" (click)="deleteCart(prod.pId)">Remove</div>
 		      </div>
 		    </div>
 		  </div>
@@ -43,7 +42,7 @@
 	<div class="card">
 		<div class="card-body">
 			<div class="card-text">
-				Total Amount : Rs. 2000
+				Total Amount : Rs. {{tPrice}}
 			</div>
 		</div>
 	</div>

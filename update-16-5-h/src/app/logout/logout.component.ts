@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalserviceService } from '../modalservice.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-logout',
@@ -9,7 +10,8 @@ import { ModalserviceService } from '../modalservice.service';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private route: Router, private modalService: ModalserviceService) { }
+  constructor(private route: Router, private modalService: ModalserviceService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
@@ -17,7 +19,7 @@ export class LogoutComponent implements OnInit {
   logout(){
   	sessionStorage.clear();
     this.modalService.open('logout-modal');
-    setTimeout(() => this.route.navigate(['/login']), 1000);
+    setTimeout(() => {this.modalService.close('logout-modal');this.route.navigate(['/login'])}, 1000);
   }
 
   closeModal(){

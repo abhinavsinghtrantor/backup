@@ -1,10 +1,7 @@
 <div class="header">
-  <div class="heading" style="margin-bottom: 40px;"><div style="color: #ffffff; font-size: 24px; float: left;width: 50%;">Test App</div><app-logout #logt (click) = "logout()"></app-logout></div>
-  <div class="top-container">
-    <div class="search-box">
-      <input type="text" placeholder="Search for products/services" />
-    </div>
-</div>
+
+  <div class="heading" style="margin-bottom: 20px;"><div style="color: #ffffff; font-size: 24px; float: left;width: 50%;"><a routerLink="/main">Test App</a></div><app-logout #logt (click) = "logout()"></app-logout></div>
+  
 </div>
 <div class="container-fluid">
 
@@ -18,8 +15,9 @@
   </div>
 </div>
 
-<div class="bottom-container">
+<div class="bottom-container" style="position: relative">
     <h4>Shop Online</h4>
+    <div style="position: absolute; top:12px; right:25px; background: red; color: #ffffff; width: 50px; padding: 5px;"><a routerLink="/ecom/status/track" style="color: #ffffff;">Track</a></div>
     <div class="row" *ngFor="let items of shopCategories">
       <div class="col col1"><div style="text-align: center"><a routerLink="{{items[0].r}}" ><div><i class="fa {{items[0].icon}}" aria-hidden="true"></i></div><div>{{items[0].n}}</div></a></div></div>
       <div class="col"><div style="text-align: center"><a routerLink="{{items[1].r}}" ><div><i class="fa {{items[1].icon}}" aria-hidden="true"></i></div><div>{{items[1].n}}</div></a></div></div>

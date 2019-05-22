@@ -7,15 +7,11 @@
   <div *ngIf = "isCartEmpty">Your cart is empty</div>
  <div class="card" style="width: 100%;" *ngFor="let prod of products">
     <div class="card-body">
-      <div class="left">wwe</div>
+      <div class="left"><img src="assets/{{prod.imgUrl}}" width="50%" /></div>
       <div class="right">
       	<div class="title">{{prod.title}}</div>
       	<div class="price">
       		<div class="d-price">Rs. {{prod.dPrice}}</div>
-      		<div class="a-price">
-      			<span>Rs. {{prod.aPrice}}</span>
-      			<span>{{prod.discount}} Off</span>
-      		</div>
       	</div>
         <div class="cart-remove" (click)="deleteCart(prod.pId)">Remove</div>
       </div>

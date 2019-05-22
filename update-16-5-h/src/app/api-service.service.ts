@@ -15,6 +15,14 @@ export class ApiServiceService {
     this.url = environment.SERVER_URL;
    }
 
+   getNearby(coords){
+      return this.http.post(this.url+"/getNearbyLocation/", {coords: coords});
+   }
+
+   trackOrder(orderId){
+     return this.http.post(this.url+"/trackOrder/", {orderId : orderId});
+   }
+
   getSubCategories(cId) {
     if(sessionStorage.getItem("token") != undefined){
       this.token = sessionStorage.getItem("token");
@@ -40,11 +48,23 @@ export class ApiServiceService {
   };
 
   getAddress(){
-  	return this.http.get(this.url+"/getAddress");
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }
+    let headers = new HttpHeaders(
+          { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+        );
+  	return this.http.get(this.url+"/getAddress", {headers : headers});
   }
 
   saveAddress(obj){
-  	return this.http.post(this.url+"/saveAddress", obj);
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }
+    let headers = new HttpHeaders(
+          { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+        );
+  	return this.http.post(this.url+"/saveAddress", obj, {headers : headers});
   }
 
   updateRating(pId, rating){
@@ -91,10 +111,16 @@ export class ApiServiceService {
   }
 
   completeOrder(payMode){
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }
+    let headers = new HttpHeaders(
+          { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+        );
     let cart = JSON.parse(sessionStorage["cart"]);
     let addressId = sessionStorage["addressId"];
-    let obj = {cart : cart, addressId : addressId};
-    return this.http.post(this.url+"/completeOrder", obj);
+    let obj = {cart : cart, addressId : addressId, payMode : payMode};
+    return this.http.post(this.url+"/completeOrder", obj, {headers : headers});
   }
 
   logout(){
