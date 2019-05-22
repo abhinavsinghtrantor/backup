@@ -11,7 +11,7 @@ export class EcomDelAddressComponent implements OnInit {
 
   isNewAddress : boolean = false;
   highlight : boolean[] = [];
-  address : any = {};
+  addresses : any = {};
 
   name : String;
   mobile : String;
@@ -24,10 +24,10 @@ export class EcomDelAddressComponent implements OnInit {
   constructor(private api : ApiServiceService, private router: Router) { }
 
   ngOnInit() {
-    this.api.getAddress().subscribe((data: any) => {this.address = data.address});
+    this.api.getAddress().subscribe((data: any) => {this.addresses = data.addresses});
   }
 
-  cardClick(ev){
+  cardClick(ev, addressId){
   	for(let i=0;i<this.highlight.length;i++){
   		this.highlight[i] = false;
   	}

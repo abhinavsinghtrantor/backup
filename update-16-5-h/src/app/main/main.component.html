@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="heading">Test App</div>
+  <div class="heading" style="margin-bottom: 40px;"><div style="color: #ffffff; font-size: 24px; float: left;width: 50%;">Test App</div><app-logout #logt (click) = "logout()"></app-logout></div>
   <div class="top-container">
     <div class="search-box">
       <input type="text" placeholder="Search for products/services" />
@@ -17,19 +17,21 @@
       <div class="col"><div style="text-align: center"><a routerLink="{{items[2].r}}" ><div><i class="fa {{items[2].icon}}" aria-hidden="true"></i></div><div>{{items[2].n}}</div></a></div></div>
   </div>
 </div>
-<div class="bottom-container">
-    <h5>Top Offers</h5>
-    <div class="row" *ngFor="let items of topOffersItems">
-      <div class="col col1"><div style="text-align: center"><div>{{items[0].name}}</div><div>{{items[0].offer}}</div></div></div>
-      <div class="col"><div style="text-align: center"><div>{{items[1].name}}</div><div>{{items[1].offer}}</div></div></div>
-  </div>
-</div>
 
 <div class="bottom-container">
     <h4>Shop Online</h4>
     <div class="row" *ngFor="let items of shopCategories">
       <div class="col col1"><div style="text-align: center"><a routerLink="{{items[0].r}}" ><div><i class="fa {{items[0].icon}}" aria-hidden="true"></i></div><div>{{items[0].n}}</div></a></div></div>
       <div class="col"><div style="text-align: center"><a routerLink="{{items[1].r}}" ><div><i class="fa {{items[1].icon}}" aria-hidden="true"></i></div><div>{{items[1].n}}</div></a></div></div>
+  </div>
+</div>
+
+<div class="bottom-container p-offers">
+    <h5>Offers For You</h5>
+    <div class="row" *ngFor="let items of topOffersItems">
+      <div class="col col1"><div style="text-align: center;"><a routerLink="{{items[0].r}}" ><div style="color: #bc3f3d !important; font-weight: bold">{{items[0].name | uppercase}}</div><div style="color: #bc3f3d !important; font-weight: bold">{{items[0].offer}}</div></a></div></div>
+      
+      <div class="col"><div style="text-align: center"><a routerLink="{{items[1].r}}" ><div style="color: #bc3f3d !important; font-weight: bold">{{items[1].name | uppercase}}</div><div style="color: #bc3f3d !important; font-weight: bold">{{items[1].offer}}</div></a></div></div>
   </div>
 </div>
 

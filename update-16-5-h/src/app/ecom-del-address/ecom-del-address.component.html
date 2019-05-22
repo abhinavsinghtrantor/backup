@@ -1,11 +1,12 @@
 <div class="header">
-  <div class="heading"><i class="fa fa-arrow-left" aria-hidden="true" (click)="back()"></i>Test App</div>
+  <div class="heading" style="margin-bottom: 40px;"><div style="color: #ffffff; font-size: 24px; float: left;width: 50%;">Test App</div><div style="color: #ffffff; font-size: 14px; float: left; text-align: right; width: 50%; padding-top:10px; padding-right: 10px;">Logout</div></div>
 </div>
 
 <div class="container-fluid">
 	<div class="select-address" *ngIf="!isNewAddress">
 		<h5>Select Address</h5>
-		<div class="card" (click) = "cardClick($event)" [class.highlight] = "highlight[0]">
+		<div class="card" (click) = "cardClick($event, address.addressId)" [class.highlight] = "highlight[0]"
+		 *ngFor = "let address of addresses">
 			<div class="card-body">
 				<div class="card-text">
 					<div class="name">{{address.name}}</div>

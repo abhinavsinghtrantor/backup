@@ -16,11 +16,23 @@ export class ApiServiceService {
    }
 
   getSubCategories(cId) {
-    return this.http.get(this.url+"/getSubCategories/"+cId);
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }
+    let headers = new HttpHeaders(
+          { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+        );
+    return this.http.get(this.url+"/getSubCategories/"+cId, {headers : headers});
   }
 
   getProducts(cId){
-  	return this.http.get(this.url+"/collection/"+cId);
+    if(sessionStorage.getItem("token") != undefined){
+      this.token = sessionStorage.getItem("token");
+    }
+    let headers = new HttpHeaders(
+          { "x-access-token": sessionStorage.getItem('token'), "Content-Type": "application/json" }
+        );
+  	return this.http.get(this.url+"/collection/"+cId, {headers : headers});
   };
 
   getProductDetail(cId, pId){

@@ -16,10 +16,11 @@ import { LoginComponent } from './login/login.component';
 import { BservicesComponent } from './bservices/bservices.component';
 import { BillpaymentComponent } from './billpayment/billpayment.component';
 import { ModalComponent } from './modal/modal.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
-    AppComponent, MainComponent, LoginComponent, BservicesComponent, BillpaymentComponent, ModalComponent
+    AppComponent, MainComponent, LoginComponent, BservicesComponent, BillpaymentComponent, ModalComponent, LogoutComponent
   ],
   imports: [
     BrowserModule,

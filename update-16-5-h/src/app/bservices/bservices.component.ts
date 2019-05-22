@@ -156,4 +156,8 @@ export class BservicesComponent implements OnInit {
       }
     })
   }
+
+   closeModal(id){
+    this.modalService.close(id);
+  }
 }

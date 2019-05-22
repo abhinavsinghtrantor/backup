@@ -65,7 +65,8 @@ export class LoginComponent implements OnInit {
           let accounts = data.accounts;
           let token = data.token;
           let id = data.id;
-          this.userService.createSession(this.aadharNum, user, accounts, token, id);
+          let pList = data.personalList;
+          this.userService.createSession(this.aadharNum, user, accounts, token, id, pList);
           this.router.navigate(['/main']);
         }
       });

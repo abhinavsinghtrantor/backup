@@ -22,10 +22,11 @@ export class UserServiceService {
     return this.http.post("http://localhost:3000/login", data);
   }
 
-  createSession(aadharNum, user, accounts, token, id){
+  createSession(aadharNum, user, accounts, token, id, pList){
     sessionStorage['user'] = JSON.stringify({aadharNum : aadharNum, name : user.name, age : user.age, mobile : user.mobile});
     sessionStorage['token'] = token;
     sessionStorage['id'] = id;
+    sessionStorage['pList'] = JSON.stringify(pList);
     sessionStorage['accDetails'] = JSON.stringify({});
     sessionStorage['accounts'] = JSON.stringify(accounts);
   }

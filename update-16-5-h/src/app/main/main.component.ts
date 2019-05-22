@@ -1,6 +1,7 @@
 declare var google : any;
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { LogoutComponent } from '../logout/logout.component';
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,7 @@ export class MainComponent implements OnInit {
   shopCategories: any[] = [[]];
   isBankVisible: boolean = true;
   isShopVisible: boolean = false;
+  @ViewChild('logt') logt:LogoutComponent;
 
   constructor(private router: Router) { }
 
@@ -32,8 +34,13 @@ export class MainComponent implements OnInit {
     this.bItems[2] = [{icon:"fa-industry", n:"Buy Insurance", r:"/bank/insurance"}, {icon:"fa-credit-card", n:"Credit Cards", r:"/bank/cards"}, {icon:"fa-bar-chart", n:"Mutual Funds", r:"/bank/mutual-funds"}];
     this.bItems[3] = [{icon:"fa-percent", n: "Loan Enquiry", r:"/bank/loan-enquiry"}, {icon:"fa-share", n:"Pay EMI", r:"/bank/pay-emi"}, {icon:"fa-cubes", n:"More", r:"/bank/more"}];
 
-    this.topOffersItems[0] = [{name: "Mobile Phones", offer : "30% Off"}, {name: "Men T-Shirts", offer : "50% Off"}]
-    this.topOffersItems[1] = [{name: "Bluetooth Speakers", offer : "10% Cashback"}, {name: "Perfumes", offer : "25% Off"}]
+    let pList = JSON.parse(sessionStorage['pList']);
+    let pList1 = pList.slice();
+    let pList2 = pList.slice();
+    this.topOffersItems[0] = pList1.splice(0,2);
+    this.topOffersItems[1] = pList2.splice(2,4);
+    //this.topOffersItems[0] = [{name: "Mobile Phones", offer : "30% Off"}, {name: "Men T-Shirts", offer : "50% Off"}]
+    //this.topOffersItems[1] = [{name: "Bluetooth Speakers", offer : "10% Cashback"}, {name: "Perfumes", offer : "25% Off"}]
 
     this.shopCategories[0] = [{icon:"fa-mobile", n: "Electronics", r: "/ecom/electronics"}, {icon:"fa-mars", n: "Men's Fashion", r: "/ecom/men-fashion"}, {icon:"fa-venus", n: "Women's Fashion", r: "/ecom/women-fashion"}];
     this.shopCategories[1] = [{icon:"fa-shopping-basket", n: "Grocery", r: "/ecom/grocery"}, {icon:"fa-shopping-cart", n: "Household", r: "/ecom/household"}, {icon:"fa-soccer-ball-o", n: "Sports", r: "/ecom/sports"}];
@@ -90,6 +97,10 @@ export class MainComponent implements OnInit {
         infowindow1.open(map, marker1);
         infowindow2.open(map, marker2);
         infowindow3.open(map, marker3);
+}
+
+logout(){
+  this.logt.logout();
 }
 
 }
