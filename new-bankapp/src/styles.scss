@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    overflow-x: hidden;
+}
+.left, .right{
+    width: 50%;
+    float: left;
+    position: relative;
+    height: 100%;
+}
+.btn-success .btn, .btn.btn-success{
+	border-color: #212121 !important;
+    background-color: #212121 !important;
+}

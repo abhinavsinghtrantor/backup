@@ -1,0 +1,24 @@
+<header class="header-6">
+        <div class="menu-btn">
+          <clr-icon shape="bars" (click)="menuClick()" ></clr-icon>
+        </div>
+        <div class="title">
+            BankApp
+        </div>
+        <div class="notification-icon">
+          <clr-icon shape="bell" class="is-solid"></clr-icon>
+        </div>
+    </header>
+<div class="side-menu-container" [ngClass] = 'style'>
+	
+	<div class="close" (click)="closeMenu()">X</div>
+    <ul>
+    <li>Home</li>
+    <li>Pending Orders</li>
+    <li>Orders</li>
+    <li>New Users</li>
+    <li>Total Users</li>
+    <li>Create Discounts</li>
+    <li>My Offers</li>
+  </ul>
+</div>

@@ -1,0 +1,174 @@
+<app-side-menu></app-side-menu>
+<div class="main-container">
+    <div class="top-container">
+      <div class="shop-for-customer">
+        <button class="btn btn-success">Shop for Customer</button>
+      </div>
+      <div class="total-orders d-card">
+        <div class="left">
+          <div class="heading">TOTAL ORDERS</div>
+          <div class="value">{{orders.total}}</div>
+          <div class="card-footer">
+            <clr-icon shape="arrow"></clr-icon>
+            <span class="growth">{{orders.growth}}</span>
+            <span class="compare">{{orders.time}}</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="circle" style="background-color: #11cdef;">
+            <clr-icon shape="shopping-bag"></clr-icon>
+          </div>
+          <div class="card-footer crit">
+            <span [ngClass]="orderTimeDay" (click)="getOrders('day')">Day</span>
+            <span [ngClass]="orderTimeWeek" (click)="getOrders('week')">Week</span>
+            <span [ngClass]="orderTimeMonth" (click)="getOrders('month')">Month</span>
+          </div>
+        </div>
+      </div>
+      <div class="new-users d-card">
+          <div class="left">
+              <div class="heading">NEW USERS</div>
+              <div class="value">{{nUsers.total}}</div>
+              <div class="card-footer">
+                <clr-icon shape="arrow"></clr-icon>
+                <span class="growth">{{nUsers.growth}}</span>
+                <span class="compare">{{nUsers.time}}</span>
+              </div>
+            </div>
+            <div class="right">
+              <div class="circle" style="background-color: #fb6340;">
+                  <clr-icon shape="user"></clr-icon>
+              </div>
+              <div class="card-footer crit">
+                <span [ngClass]="nUserTimeDay" (click)="getNewUsers('day')">Day</span>
+                <span [ngClass]="nUserTimeWeek" (click)="getNewUsers('week')">Week</span>
+                <span [ngClass]="nUserTimeMonth" (click)="getNewUsers('month')">Month</span>
+              </div>
+            </div>
+      </div>
+      <div class="repeating-users d-card">
+          <div class="left">
+              <div class="heading">TOTAL USERS</div>
+              <div class="value">{{tUsers.total}}</div>
+              <div class="card-footer">
+                <clr-icon shape="arrow"></clr-icon>
+                <span class="growth">{{tUsers.growth}}</span>
+                <span class="compare">{{tUsers.time}}</span>
+              </div>
+            </div>
+            <div class="right">
+              <div class="circle" style="background-color: #5603ad;">
+                  <clr-icon shape="users"></clr-icon>
+              </div>
+              <div class="card-footer crit">
+                <span [ngClass]="tUserTimeDay" (click)="getTotalUsers('day')">Day</span>
+                <span [ngClass]="tUserTimeWeek" (click)="getTotalUsers('week')">Week</span>
+                <span [ngClass]="tUserTimeMonth" (click)="getTotalUsers('month')">Month</span>
+              </div>
+            </div>
+      </div>
+      <div class="total-profit d-card">
+          <div class="left">
+              <div class="heading">PROFIT</div>
+              <div class="value">{{profit.total}}</div>
+              <div class="card-footer">
+                <clr-icon shape="arrow"></clr-icon>
+                <span class="growth">{{profit.growth}}</span>
+                <span class="compare">{{profit.time}}</span>
+              </div>
+            </div>
+            <div class="right">
+              <div class="circle" style="background-color: #2dce89;">
+                  <clr-icon shape="rupee"></clr-icon>
+              </div>
+              <div class="card-footer crit">
+                <span [ngClass]="profitTimeDay" (click)="getProfit('day')">Day</span>
+                <span [ngClass]="profitTimeWeek" (click)="getProfit('week')">Week</span>
+                <span [ngClass]="profitTimeMonth" (click)="getProfit('month')">Month</span>
+              </div>
+            </div>
+      </div>
+      <div class="my-actions">
+          <button class="btn btn-success">My Actions</button>
+        </div>
+    </div>
+
+    <div class="report-container">
+      <div class="top-selling">          
+        <div class="top-products">
+          <h5>Top Selling Products of your store</h5>
+          <div class="products">
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+            <div class="product">
+              <img src="assets/images/m1.jpg" width="100%"/>
+              <div class="p-title">Mobile Phone</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="top-products">
+            <h5>Top Selling Categories of your store</h5>
+            <div class="categories">
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="report-container suggestion-container">
+        <div class="top-selling">    
+          <h5 style="font-weight: bold;">TOP PICKS FOR YOU</h5>      
+          <div class="top-products">
+            <h5>Top Products for you</h5>
+            <div class="products">
+            </div>
+          </div>
+  
+          <div class="top-products">
+              <h5>Top Categories for you</h5>
+              <div class="categories">
+              </div>
+          </div>
+
+          <div class="top-products">
+              <h5>Top Offers for you</h5>
+              <div class="categories">
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
